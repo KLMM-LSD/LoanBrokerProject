@@ -4,7 +4,7 @@ Link TBD
   
 This is our repository for the System Integration Loan broker project in Cphbusiness, PBA in software development.
 
-**Table of contents**
+**Table of content**
 - TBD
 - TBD
 - TBD
