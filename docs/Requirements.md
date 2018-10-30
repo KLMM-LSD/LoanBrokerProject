@@ -10,7 +10,7 @@ The Loan broker component must contact the banks using a distribution strategy. 
 ### The flow of the project goes as a following. 
 
 1. Receive the consumer's loan quote request (ssn, loan amount, loan duration)
-2. Obtain credit score from credit agency (ssn  credit score)
+2. Obtain credit score from credit agency (ssn credit score)
 3. Determine the most appropriate banks to contact from the Rule Base web service
 4. Send a request to each selected bank (ssn, credit score, loan amount, loan duration)
 5. Collect response from each selected bank
@@ -45,6 +45,8 @@ For xml:
 ```
 
 For JSON:
+
+Request
 ```
 {
 "ssn":1605789787,
@@ -53,9 +55,13 @@ For JSON:
 "loanDuration":360
 }
 ```
+
+Response
 ```
 {
 "interestRate":5.5,
 "ssn":1605789787
 }
 ```
+
+For more information refer to: [PDF](https://github.com/KLMM-LSD/LoanBrokerProject/blob/master/docs/Loan%20Broker%20Project.pdf)
