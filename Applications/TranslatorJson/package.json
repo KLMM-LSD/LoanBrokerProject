@@ -1,0 +1,36 @@
+{
+  "name": "translatorjson",
+  "version": "1.0.0",
+  "description": "Package for JSON translator bank in project Loanbroker",
+  "main": "index.js",
+  "scripts": {
+    "start": "node .",
+    "test": "nyc mocha",
+    "coverage": "nyc --reporter=html --reporter=text mocha",
+    "dev": "nodemon ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KLMM-LSD/LoanBrokerProject.git"
+  },
+  "author": "Michael Veilis",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KLMM-LSD/LoanBrokerProject/issues"
+  },
+  "homepage": "https://github.com/KLMM-LSD/LoanBrokerProject#readme",
+  "dependencies": {
+    "amqplib": "^0.5.2",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0",
+    "rimraf": "^2.6.2"
+  },
+  "devDependencies": {
+    "babel-plugin-istanbul": "^5.1.0",
+    "nodemon": "^1.18.6",
+    "nyc": "^13.1.0"
+  }
+}
