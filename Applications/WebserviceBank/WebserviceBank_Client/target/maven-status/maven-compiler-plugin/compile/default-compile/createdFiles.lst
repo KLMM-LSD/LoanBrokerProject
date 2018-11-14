@@ -1,0 +1,7 @@
+webservice\WebserviceBank_Service.class
+com\mycompany\webservicebank_client\Client.class
+webservice\ObjectFactory.class
+webservice\WebserviceBank.class
+webservice\HelloResponse.class
+webservice\Hello.class
+webservice\package-info.class
