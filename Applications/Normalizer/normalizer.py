@@ -8,8 +8,6 @@ def getCorrelationID(header_frame):
 
 def jsonQuote(channel, method_frame, header_frame, body):        
 	dict = json.loads(body)
-	
-	dict = {}
 
 	toAggregator(dict)
 	return
@@ -24,16 +22,17 @@ def xmlQuote(channel, method_frame, header_frame, body):
 def toAggregator(dictionary):
 	dictionary['bankID'] = getCorrelationID(header_frame)
 	
-	request = Request()
+	request = requests.post('localhost:8081/postQuote', data=json.dumps(dictionary))
+	return
 	
 def start():
 	conn = pika.BlockingConnection()
 	channel = conn.channel()
 	xmlQueue = channel.declare('klmm.normalize.xml', passive=True, durable=True ...)
-	jsonQueue = channel.declare('klmm.normalize.json', passive=True, no_ack=True, durable=True ...)
+	jsonQueue = channel.declare('klmm.normalize.json', passive=True, durable=True ...)
 	
-	channel.basic_consume(xmlQuote, xmlQueue ...)
-	channel.basic_consume(jsonQuote, jsonQueue ...)
+	channel.basic_consume(xmlQuote, xmlQueue, no-ack=True)
+	channel.basic_consume(jsonQuote, jsonQueue, no-ack=True)
 	
 	#Ensuring that default sigint handler is ready
 	signal.signal(signal.SIGINT, signal.default_int_handler)
