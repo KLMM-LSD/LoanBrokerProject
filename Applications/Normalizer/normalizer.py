@@ -39,7 +39,7 @@ def start():
 	try:
 		channel.start_consuming()
 	except KeyboardInterrupt:
-		conn.close(reply_code=200, reply_text='Normal shutdown)
+		conn.close(reply_code=200, reply_text='Normal shutdown')
 
 start()
 
