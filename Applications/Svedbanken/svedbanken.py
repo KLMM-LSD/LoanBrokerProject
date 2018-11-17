@@ -4,6 +4,7 @@
 import aio_pika
 from aio_pika import ExchangeType
 import asyncio, signal, json
+from functools import partial
 
 __exchangename = "GroupB.svedbanken.requests"
 
@@ -14,23 +15,25 @@ def calculateEligible(creditScore):
     return False
 
 def calculateRate(creditScore, loanAmount, loanDuration):
-    rate = (300.0 - (creditScore - 500.0)) / 100.0 + 0.01
-	
-    if loanDuration < 120:
-        rate+= 1.0
+    rate = (300.0 - (creditScore - 500.0)) / 100.0 + 1.2
+    
+    if loanDuration  < 31:
+        # Because we value having you as a customer <3
+        rate+= 8.33
     elif loanDuration  < 60:
         rate+= 5.0
+    elif loanDuration < 120:
+        rate+= 1.0
+
     
     if loanAmount > 10000.0:
         rate = rate / 2
-    
-    
+        
     return rate
 
-async def handleQuote(message):
+async def handleQuote(message, channel):
     with message.process():
         dict = json.loads(message.body)
-        #raise Exception(str(message.body))
         
         if calculateEligible(dict['creditScore']):
             outbody = json.dumps(
@@ -42,7 +45,7 @@ async def handleQuote(message):
                                         'ssn': dict['ssn']
                                     }
                                 )
-            await message.channel.default_exchange.publish(aio_pika.Message(body = outbody, correlation_id = message.correlation_id), routing_key = message.reply_to)
+            await channel.default_exchange.publish(aio_pika.Message(body = outbody.encode(), correlation_id = message.correlation_id), routing_key = message.reply_to)
             
             
 async def main(loop):
@@ -51,8 +54,12 @@ async def main(loop):
     channel = await connection.channel()
     
     #These could happen in parallel ( async.wait()? )
-    sb_exchange = await channel.declare_exchange(__exchangename, ExchangeType.FANOUT, passive=True, durable=True)
-    inqueue = await channel.declare_queue(auto_delete=True, exclusive=True)
+    tempex = channel.declare_exchange(__exchangename, ExchangeType.FANOUT, passive=True, durable=True)
+    tempin = channel.declare_queue(auto_delete=True, exclusive=True)
+    
+    sb_exchange = await tempex
+    inqueue = await tempin
+    
     
     await inqueue.bind(sb_exchange)
     
@@ -60,7 +67,8 @@ async def main(loop):
     signal.signal(signal.SIGINT, signal.default_int_handler)
     try:
         while True:
-            await inqueue.consume(handleQuote)
+            await asyncio.sleep(1)
+            await inqueue.consume(partial(handleQuote, channel=channel))
     except KeyboardInterrupt:
         connection.close()
 
