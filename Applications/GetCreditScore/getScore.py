@@ -6,9 +6,6 @@ def getCreditScoreFromWsdl(ssn):
     client = zeep.Client(wsdl=wsdl)
     return client.service.creditScore(ssn)
 
-def callback_func(self, ch, method, properties, body):
-    print("{} received '{}'".format(self.name, body))
-
 def sendQueue():
     connection = pika.BlockingConnection(pika.ConnectionParameters(host='datdb.cphbusiness.dk'))
     channel = connection.channel()
