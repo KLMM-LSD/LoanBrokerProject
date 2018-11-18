@@ -1,29 +1,29 @@
 import zeep
 import pika
+import json
+import sys
 
 def getCreditScoreFromWsdl(ssn):
     wsdl = 'http://datdb.cphbusiness.dk:8080/CreditScoreService/CreditScoreService?wsdl'
     client = zeep.Client(wsdl=wsdl)
     return client.service.creditScore(ssn)
 
-def sendQueue():
+def sendQueue(jsonData):
     connection = pika.BlockingConnection(pika.ConnectionParameters(host='datdb.cphbusiness.dk'))
     channel = connection.channel()
 
     channel.exchange_declare(exchange='GroupB.creditscore.exchange', exchange_type='direct')
 
-    creditscore = getCreditScoreFromWsdl('546372-9807')
+    jsonData['creditScore'] = getCreditScoreFromWsdl(jsonData['ssn'])
     channel.basic_publish(exchange='GroupB.creditscore.exchange',
                           routing_key='creditscore',
-                          body=str(creditscore))
+                          body=json.dumps(jsonData))
 
-    print(" [x] Sent %r" % (creditscore))
+    print(" [x] Sent %r" % (jsonData))
 
     connection.close()
 
 def listenQueue():
-    sendQueue()
-
     connection = pika.BlockingConnection(pika.ConnectionParameters(host='datdb.cphbusiness.dk'))
     channel = connection.channel()
 
@@ -48,8 +48,14 @@ def listenQueue():
 
     channel.start_consuming()
 
-def main():
-    listenQueue()
+def main(ssn, loanAmount, loanDuration):
+    jsonData = {
+        "ssn":ssn,
+        "loan-Amount": loanAmount,
+        "loan-Duration": loanDuration
+    }
+    sendQueue(json.loads(json.dumps(jsonData)))
+    #listenQueue()
 
 if __name__=="__main__":
-    main()
+    main(sys.argv[1], sys.argv[2], sys.argv[3])
