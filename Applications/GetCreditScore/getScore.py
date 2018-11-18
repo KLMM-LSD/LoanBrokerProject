@@ -10,10 +10,10 @@ def sendQueue():
     connection = pika.BlockingConnection(pika.ConnectionParameters(host='datdb.cphbusiness.dk'))
     channel = connection.channel()
 
-    channel.exchange_declare(exchange='GroupB.exchange', exchange_type='direct')
+    channel.exchange_declare(exchange='GroupB.creditscore.exchange', exchange_type='direct')
 
     creditscore = getCreditScoreFromWsdl('546372-9807')
-    channel.basic_publish(exchange='GroupB.exchange',
+    channel.basic_publish(exchange='GroupB.creditscore.exchange',
                           routing_key='creditscore',
                           body=str(creditscore))
 
@@ -23,17 +23,17 @@ def sendQueue():
 
 def listenQueue():
     sendQueue()
-    
+
     connection = pika.BlockingConnection(pika.ConnectionParameters(host='datdb.cphbusiness.dk'))
     channel = connection.channel()
 
-    channel.exchange_declare(exchange='GroupB.exchange',
+    channel.exchange_declare(exchange='GroupB.creditscore.exchange',
                              exchange_type='direct')
 
     result = channel.queue_declare(exclusive=True)
     queue_name = result.method.queue
 
-    channel.queue_bind(exchange='GroupB.exchange',
+    channel.queue_bind(exchange='GroupB.creditscore.exchange',
                        queue=queue_name,
                        routing_key='creditscore')
 
