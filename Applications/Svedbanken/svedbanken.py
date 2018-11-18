@@ -26,7 +26,7 @@ def calculateRate(creditScore, loanAmount, loanDuration):
         rate+= 1.0
 
     
-    if loanAmount > 10000.0:
+    if loanAmount > 20000.0:
         rate = rate / 2
         
     return rate
@@ -70,7 +70,8 @@ async def main(loop):
             await asyncio.sleep(1)
             await inqueue.consume(partial(handleQuote, channel=channel))
     except KeyboardInterrupt:
-        connection.close()
+        pass
+    await connection.close()
 
     
 if __name__ == "__main__":

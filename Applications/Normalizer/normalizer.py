@@ -8,6 +8,7 @@ from functools import partial
 
 __exchangename = "GroupB.normalizer"
 __outputexchangename = "GroupB.aggregator"
+__timeout = 1
 
 def log(msgdict):
     with open('normalized.log', 'a') as f:
@@ -36,18 +37,18 @@ def xmlQuote(message, exchange):
 async def jsonLoop(queue, exchange):
     print("JSONLOOP")
     while True:
-        await asyncio.sleep(1)
+        await asyncio.sleep(__timeout)
         await queue.consume(partial(jsonQuote, exchange=exchange))
         
 async def xmlLoop(queue, exchange):
     print("XMLLOOP")
     while True:
-        await asyncio.sleep(1)
+        await asyncio.sleep(__timeout)
         await queue.consume(partial(xmlQuote, exchange=exchange))
     
 def toAggregator(outdict, exchange, correlationID):
-    log(outdict)
     exchange.publish(aio_pika.Message(body = json.dumps(outdict).encode(), correlation_id = correlationID), routing_key='response')
+    log(outdict)
     return
     
 async def main(loop):
