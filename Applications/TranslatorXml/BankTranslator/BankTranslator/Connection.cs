@@ -14,8 +14,8 @@ using System.Diagnostics;
 public class Connection
 {
     private static readonly String HOST = "datdb.cphbusiness.dk";
-    private static readonly String USERNAME = "guest";
-    private static readonly String PASSWORD = "guest";
+    private static readonly String USERNAME = "pssword";
+    private static readonly String PASSWORD = "pssword";
     private static readonly String TYPE = "direct";
 //    Channel channel;
 
