@@ -13,8 +13,8 @@ import java.util.concurrent.TimeoutException;
 public class Connections {
 
     private final String HOST = "datdb.cphbusiness.dk";
-    private final String USERNAME = "guest";
-    private final String PASSWORD = "guest";
+    private final String USERNAME = "password";
+    private final String PASSWORD = "password";
 
     private Channel channel;
     private Connection connection;

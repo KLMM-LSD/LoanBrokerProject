@@ -1,3 +1,3 @@
-import 'babel-core/register';
-import { main } from './src/main';
+require('babel-core/register');
+let main = require('./src/main').main;
 main();
