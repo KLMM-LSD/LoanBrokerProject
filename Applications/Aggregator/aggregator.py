@@ -74,7 +74,7 @@ def bestLoanDecision(ssn, timeout):
         bestRate = min(__ssNumbers[ssn], key= lambda d:d['interestRate'])
         
         #Send bestRate to destination (File for now)
-        with open(ssn + ".txt", "w") as loanFile:
+        with open(ssn + ".log", "w") as loanFile:
             quoteCount = len(__ssNumbers[ssn])
             loanFile.write("Best rate is " + str(bestRate['interestRate']) + " at " + str(bestRate['ssn']) + ", from " + str(quoteCount) + " quotes total\n")
             
