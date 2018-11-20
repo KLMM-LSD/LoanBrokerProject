@@ -37,7 +37,7 @@ def bankCreation():
     return banks
 
 def getCreditScoreFromBanks(creditScore):
-    allBanks = bankCreation().get("banks")
+    allBanks = bankCreation()["banks"]
     bankResults = {}
     bankList = []
 
