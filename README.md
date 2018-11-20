@@ -19,6 +19,8 @@
 - TBD
 - TBD
 
+---
+
 ## 1. Loan Broker Documentation
 > See the full description of the Loan Broker project here: https://github.com/KLMM-LSD/LoanBrokerProject/blob/master/docs/Loan%20Broker%20Project.pdf
 > 
