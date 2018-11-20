@@ -1,20 +1,20 @@
 module.exports = {
     consumer: {
-        type: 'direct',
-        exchange: '<enpointname>',
+        type: 'fanout',
+        exchange: 'GroupB.translators',
         binding: 'DatBank'
     },
     producer: {
         exchangeType: 'fanout',
         exchange: 'cphbusiness.bankJSON',
-        replyTo: '<endpointname>',
+        replyTo: 'GroupB.normalizer.json',
         bankID: 'bankJSON',
         type: 'json'
     },
     connection: {
-        host: 'datdb.cphbusiness.dk',
-        port: '15672',
-        username: 'guest',
-        password: 'guest'
+        HOST: 'datdb.cphbusiness.dk',
+        PORT: '15672',
+        USERNAME: 'guest',
+        PASSWORD: 'guest'
     }
 }
