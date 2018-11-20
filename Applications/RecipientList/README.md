@@ -39,7 +39,6 @@
 ```
 {
 "ssn":"230800-0336",
-"creditScore":598,
 "loanAmount":10.0,
 "loanDuration":360
 "banks": [
