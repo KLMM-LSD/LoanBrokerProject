@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 @app.route('/GetBankWebServices', methods=['GET'])
 def getCreditScore():
-    creditScore = request.args.get('creditScore')
+    creditScore = int(request.args.get('creditScore'))
     print('\n{RuleBase} -- getCreditsScore');
     print('Received message (credit score): ')
     bankResults = RuleBase.getCreditScoreFromBanks(creditScore)
