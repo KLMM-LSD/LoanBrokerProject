@@ -5,6 +5,8 @@ import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.Channel;
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -13,16 +15,15 @@ import java.util.concurrent.TimeoutException;
 public class Connections {
 
     private final String HOST = "datdb.cphbusiness.dk";
-    private final String USERNAME = "password";
-    private final String PASSWORD = "password";
+    private final String USERNAME = "guest";
+    private final String PASSWORD = "guest";
 
     private Channel channel;
     private Connection connection;
     private String endPointName;
 
-    public Connections(String accessPoint) throws IOException, TimeoutException {
-        this.endPointName = accessPoint;
-
+    public Connections() throws IOException, TimeoutException {
+       
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost(HOST);
         factory.setUsername(USERNAME);
@@ -30,11 +31,21 @@ public class Connections {
 
         connection = factory.newConnection();
         channel = connection.createChannel();
-        channel.queueDeclare(accessPoint, false, false, false, null);
     }
 
     public Channel getChannel() {
+        if(channel == null){
+            try {
+                channel = connection.createChannel();
+            } catch (IOException ex) {
+                Logger.getLogger(Connections.class.getName()).log(Level.WARNING, "IOException, when trying to create a channel", ex);
+            }
+        }
         return channel;
+    }
+    
+    public Connection getConnection(){
+        return connection;
     }
 
 }
