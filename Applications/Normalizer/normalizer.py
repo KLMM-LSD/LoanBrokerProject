@@ -2,7 +2,7 @@
 # Description:.Normalizer to receive loan quotes in different formats and send them on as JSON.
 import aio_pika
 from aio_pika import ExchangeType
-import json, asyncio, signal
+import sys, json, asyncio, signal
 import xml.etree.ElementTree as ET
 from functools import partial
 
@@ -14,15 +14,16 @@ def log(msgdict):
     with open('normalized.log', 'a') as f:
         f.write(json.dumps(msgdict) + "\n")
 
-def jsonQuote(message, exchange):
+async def jsonQuote(message, exchange):
     print("JSON")
     with message.process():
         dict = json.loads(message.body)
-        toAggregator(dict, exchange, message.correlation_id)
+        print(dict)
+        await toAggregator(dict, exchange, message.correlation_id)
     return
 
     
-def xmlQuote(message, exchange):
+async def xmlQuote(message, exchange):
     print("XML")
     with message.process():
         dict = {}
@@ -30,24 +31,23 @@ def xmlQuote(message, exchange):
         root = ET.fromstring(message.body)
         dict['interestRate'] = float(root.find('interestRate').text)
         dict['ssn'] = root.find('ssn').text
-    
-        toAggregator(dict, exchange, message.correlation_id)
+        print(dict)
+        await toAggregator(dict, exchange, message.correlation_id)
     return
     
 async def jsonLoop(queue, exchange):
-    print("JSONLOOP")
     while True:
         await asyncio.sleep(__timeout)
         await queue.consume(partial(jsonQuote, exchange=exchange))
+        sys.stdout.flush()
         
 async def xmlLoop(queue, exchange):
-    print("XMLLOOP")
     while True:
         await asyncio.sleep(__timeout)
         await queue.consume(partial(xmlQuote, exchange=exchange))
     
-def toAggregator(outdict, exchange, correlationID):
-    exchange.publish(aio_pika.Message(body = json.dumps(outdict).encode(), correlation_id = correlationID), routing_key='response')
+async def toAggregator(outdict, exchange, correlationID):
+    await exchange.publish(aio_pika.Message(body = json.dumps(outdict).encode(), correlation_id = correlationID), routing_key='response')
     log(outdict)
     return
     
@@ -56,9 +56,9 @@ async def main(loop):
     
     channel = await connection.channel()
     
-    tempoutex = channel.declare_exchange(__outputexchangename, ExchangeType.FANOUT, passive=True, durable=True)
-    tempin_json = channel.declare_queue("GroupB.normalizer.json", auto_delete=True, exclusive=True)
-    tempin_xml = channel.declare_queue("GroupB.normalizer.xml", auto_delete=True, exclusive=True)
+    tempoutex = channel.declare_exchange(__outputexchangename, ExchangeType.DIRECT, passive=False, durable=True)
+    tempin_json = channel.declare_queue("GroupB.normalizer.json", auto_delete=True, exclusive=False)
+    tempin_xml = channel.declare_queue("GroupB.normalizer.xml", auto_delete=True, exclusive=False)
     
     outputexchange = await tempoutex
     inqueue_json = await tempin_json
@@ -80,6 +80,11 @@ async def main(loop):
     
 if __name__ == "__main__":
     loop = asyncio.get_event_loop()
-    loop.run_until_complete(main(loop))
+    while True:
+        try:
+            loop.run_until_complete(main(loop))
+        except (RuntimeError, ConnectionError, ConnectionRefusedError, aio_pika.pika.exceptions.ChannelClosed, aio_pika.pika.exceptions.ConnectionClosed) as e:
+            print("Connection failed...: " + str(e))
+            time.sleep(5)
     loop.close()
 

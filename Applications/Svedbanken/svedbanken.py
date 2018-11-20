@@ -3,11 +3,11 @@
 
 import aio_pika
 from aio_pika import ExchangeType
-import asyncio, signal, json
+import sys, asyncio, signal, json
 from functools import partial
 
 __exchangename = "GroupB.svedbanken.requests"
-
+__timeout = 1
 
 def calculateEligible(creditScore):
     if creditScore > 500:
@@ -54,8 +54,8 @@ async def main(loop):
     channel = await connection.channel()
     
     #These could happen in parallel ( async.wait()? )
-    tempex = channel.declare_exchange(__exchangename, ExchangeType.FANOUT, passive=True, durable=True)
-    tempin = channel.declare_queue(auto_delete=True, exclusive=True)
+    tempex = channel.declare_exchange(__exchangename, ExchangeType.FANOUT, passive=False, durable=True)
+    tempin = channel.declare_queue(auto_delete=True, exclusive=False)
     
     sb_exchange = await tempex
     inqueue = await tempin
@@ -67,8 +67,9 @@ async def main(loop):
     signal.signal(signal.SIGINT, signal.default_int_handler)
     try:
         while True:
-            await asyncio.sleep(1)
+            await asyncio.sleep(__timeout)
             await inqueue.consume(partial(handleQuote, channel=channel))
+            sys.stdout.flush()
     except KeyboardInterrupt:
         pass
     await connection.close()
@@ -76,5 +77,11 @@ async def main(loop):
     
 if __name__ == "__main__":
     loop = asyncio.get_event_loop()
-    loop.run_until_complete(main(loop))
+    while True:
+        try:
+            loop.run_until_complete(main(loop))
+        except (RuntimeError, ConnectionError, ConnectionRefusedError, aio_pika.pika.exceptions.ChannelClosed, aio_pika.pika.exceptions.ConnectionClosed) as e:
+            print("Connection failed...: " + str(e))
+            time.sleep(5)
+        
     loop.close()
