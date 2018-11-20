@@ -9,7 +9,7 @@ def getCreditScore():
     creditScore = request.args.get('creditScore')
     print('\n{RuleBase} -- getCredistScore');
     print('Received message (credit score): ')
-    bankResults = RuleBase.main()
+    bankResults = RuleBase.getCreditScoreFromBanks(100)
     return bankResults
 
 if __name__ == '__main__':

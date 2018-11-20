@@ -15,17 +15,17 @@ def bankCreation():
     bankTwo["bankName"] = "BongoBank"
     bankTwo["bankId"] = "bank-BongoBank"
     bankTwo["minCreditScore"] = 250
-    bankOne["requestWaitTime"] = 45
+    bankTwo["requestWaitTime"] = 45
 
     bankThree["bankName"] = "DatBank"
     bankThree["bankId"] = "bank-DatBank"
     bankThree["minCreditScore"] = 500
-    bankOne["requestWaitTime"] = 50
+    bankThree["requestWaitTime"] = 50
 
     bankFour["bankName"] = "Svedbanken"
     bankFour["bankId"] = "bank-Svedbanken"
     bankFour["minCreditScore"] = 700
-    bankOne["requestWaitTime"] = 120
+    bankFour["requestWaitTime"] = 120
 
     list.append(bankOne)
     list.append(bankTwo)
@@ -50,7 +50,7 @@ def getCreditScoreFromBanks(creditScore):
 
     return bankResults
 
-def main():
+#def main():
     #creditScoreOne = 100;
     #creditScoreTwo = 270;
     #creditScoreThree = 400;
@@ -58,7 +58,7 @@ def main():
 
     #print(getCreditScoreFromBanks(creditScoreTwo))
 
-    getCreditScoreFromBanks(100)
+#    return getCreditScoreFromBanks(100)
 
-if __name__ == "__main__":
-    main()
+#if __name__ == "__main__":
+#    main()
