@@ -1,7 +1,7 @@
-python ../../Svedbanken/svedbanken.py &
+python3 ../../Svedbanken/svedbanken.py &
 SVED=$!
-python ../../Normalizer/normalizer.py &
+python3 ../../Normalizer/normalizer.py &
 NORM=$!
-python ../../Aggregator/aggregator.py &
+python3 ../../Aggregator/aggregator.py &
 AGGR=$!
 
