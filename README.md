@@ -82,10 +82,10 @@ Placeholder below.
 > 2 given banks accessible from http://datdb.cphbusiness.dk:15672 as well as the 2 banks we developed. [Webservice-Bank](https://github.com/KLMM-LSD/LoanBrokerProject/tree/master/Applications/bank_webservice) and [RabbitMQ-bank](https://github.com/KLMM-LSD/LoanBrokerProject/blob/master/Applications/Svedbanken/svedbanken.py).
 
 - [Normalizer](https://github.com/KLMM-LSD/LoanBrokerProject/blob/master/Applications/Normalizer/normalizer.py) 
-> TBD
+>  The normalizer makes sure that each message has the same format, a format that the aggregator can read. 
 
 - [Aggregator](https://github.com/KLMM-LSD/LoanBrokerProject/tree/master/Applications/Aggregator)
-> TBD
+> The aggregator receives messages from the normalizer, when it has received each message (or after the timeout period), it sends the best quote back to the client, providing the best option for a loan. 
 
 ## THIS WILL BE DONE VERY SOON!
 
