@@ -62,12 +62,36 @@ Placeholder below.
 - Client/Frontend
 > something something
 
-- Get Credit Score
-> something something
+- [Get Credit Score](https://github.com/KLMM-LSD/LoanBrokerProject/blob/master/Applications/GetCreditScore/getScore.py)
+> Get Credit score related to given Social Security Number
 
-TBD +
+- [Rule Base](https://github.com/KLMM-LSD/LoanBrokerProject/tree/master/Applications/RuleBase)
+> Sets the rules for each bank (Least amount of creditscore allowed etc.) 
+
+- [Get Banks](https://github.com/KLMM-LSD/LoanBrokerProject/tree/master/Applications/GetBanks)
+> To acquire all relevant banks (according to rulebase)
+
+- [Recipient List](https://github.com/KLMM-LSD/LoanBrokerProject/tree/master/Applications/RecipientList)
+> Delegates each request to the correct translator for each bank.
+
+- Translators
+> Formats the request to the correct format for each bank and sends the loanRequest, incl. 
+[XML-translator](https://github.com/KLMM-LSD/LoanBrokerProject/tree/master/Applications/TranslatorJson), [JSON-translator](https://github.com/KLMM-LSD/LoanBrokerProject/tree/master/Applications/TranslatorJson), [Webservice-translator](TBD) and [RabbitMQ-translator](TBD).
+
+- Banks 
+> 2 given banks accessible from http://datdb.cphbusiness.dk:15672 as well as the 2 banks we developed. [Webservice-Bank](https://github.com/KLMM-LSD/LoanBrokerProject/tree/master/Applications/bank_webservice) and [RabbitMQ-bank](https://github.com/KLMM-LSD/LoanBrokerProject/blob/master/Applications/Svedbanken/svedbanken.py).
+
+- [Normalizer](https://github.com/KLMM-LSD/LoanBrokerProject/blob/master/Applications/Normalizer/normalizer.py) 
+> TBD
+
+- [Aggregator](https://github.com/KLMM-LSD/LoanBrokerProject/tree/master/Applications/Aggregator)
+> TBD
 
 ## THIS WILL BE DONE VERY SOON!
 
 ## Process flow screen dumps
+TBD
+
+## Testing
+
 TBD
