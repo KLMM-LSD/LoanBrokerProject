@@ -58,7 +58,7 @@ async def responseLoop(queue, exchange):
 async def outputLoop(exchange):
     while True:
         await asyncio.sleep(__timeout)
-        for dict in __outputDicts:
+        while not __outputDicts.empty():
             await toBrokerout(msg, exchange)
         
 async def toBrokerOut(outdict, exchange):
@@ -77,6 +77,9 @@ def bestLoanDecision(ssn, timeout):
         with open(ssn + ".log", "w") as loanFile:
             quoteCount = len(__ssNumbers[ssn])
             loanFile.write("Best rate is " + str(bestRate['interestRate']) + " at " + str(bestRate['ssn']) + ", from " + str(quoteCount) + " quotes total\n")
+        
+        #Leave mbestRate on output queue, so it will be sent on
+        __outputDicts.put(bestRate)
             
         #Then clear list so that new requests with this ssn will start the decision timer again
         __ssNumbers[ssn].clear()
