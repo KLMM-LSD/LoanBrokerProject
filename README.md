@@ -45,7 +45,9 @@ To run this project you need some prerequisites. When running it'll start up all
 ### Design of the Loan Broker
 The loan broker application is designed to integrate multiple smaller components through a mixture of rabbitMQ messaging as well as SOAP webservices. The idea is to have every component loosely coupled together. This way, we can have multiple teams working on different components - without needing a high level of communication, because every message send from one component to another has a clear and predefined format. 
 
-- Picture of our loan broker here!
+Placeholder below.
+
+![diagram](https://raw.githubusercontent.com/KLMM-LSD/LoanBrokerProject/master/Resources/LoanBrokerDesign.JPG)
 
 ### Loan quote process flow
 1. Receive the consumer's loan quote request(ssn, loan amount, loan duration)
