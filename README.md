@@ -10,7 +10,7 @@
  - Michael Boje Veilis
  - Lasse André Hansen
  - Martin Hansen
- - kristjan reinert gásadal
+ - Kristjan Reinert Gásadal
 
 ---
 
