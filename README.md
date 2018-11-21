@@ -6,7 +6,7 @@
 
 ---
 
-### Authers:
+### Authors:
  - Michael Boje Veilis
  - Lasse André Hansen
  - Martin Hansen
