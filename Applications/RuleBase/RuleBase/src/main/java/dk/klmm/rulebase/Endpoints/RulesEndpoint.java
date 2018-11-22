@@ -37,7 +37,7 @@ public class RulesEndpoint {
         return response;
     }
     
-    private List<Rules> getBankInfo(int lAmount, int lDuration, int creditScore){
+    private List<Rules> getBankInfo(double lAmount, int lDuration, int creditScore){
         List<Rules> banks = new ArrayList();
         if(creditScore >= 0 && creditScore <= 800) {
             if((lAmount >= (double) 50000) && (creditScore >= 700) && ((lDuration <= 360) && (lDuration >= 0))) {
@@ -62,6 +62,7 @@ public class RulesEndpoint {
             }
         }
         System.out.println(banks.size());
+        System.out.println(banks);
         return banks;
     }
 }

@@ -27,8 +27,8 @@ def sendQueue(jsonData):
 def main(ssn, loanAmount, loanDuration):
     jsonData = {
         "ssn":ssn,
-        "loan-Amount": loanAmount,
-        "loan-Duration": loanDuration
+        "loanAmount": loanAmount,
+        "loanDuration": loanDuration
     }
     sendQueue(json.loads(json.dumps(jsonData)))
 

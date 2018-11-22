@@ -44,7 +44,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "GetRulesRequest")
 public class GetRulesRequest {
 
-    protected int loanAmount;
+    protected double loanAmount;
     protected int loanDuration;
     protected int creditScore;
 
@@ -52,7 +52,7 @@ public class GetRulesRequest {
      * Gets the value of the loanAmount property.
      * 
      */
-    public int getLoanAmount() {
+    public double getLoanAmount() {
         return loanAmount;
     }
 
@@ -60,7 +60,7 @@ public class GetRulesRequest {
      * Sets the value of the loanAmount property.
      * 
      */
-    public void setLoanAmount(int value) {
+    public void setLoanAmount(double value) {
         this.loanAmount = value;
     }
 

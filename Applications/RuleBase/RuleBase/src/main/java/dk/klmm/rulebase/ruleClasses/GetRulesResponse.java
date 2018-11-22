@@ -56,7 +56,7 @@ public class GetRulesResponse {
      */
     public List<Rules> getRules() {
         if (rules == null) {
-            rules = new ArrayList<>();
+            rules = new ArrayList<Rules>();
         }
         return this.rules;
     }
