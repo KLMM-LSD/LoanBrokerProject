@@ -12,7 +12,7 @@ def sendQueue(jsonData):
     connection = pika.BlockingConnection(pika.ConnectionParameters(host='datdb.cphbusiness.dk'))
     channel = connection.channel()
 
-    channel.exchange_declare(exchange='GroupB.creditscore.exchange', exchange_type='direct', durable='true')
+    channel.exchange_declare(exchange='GroupB.creditscore.exchange', exchange_type='fanout', durable='true')
 
     jsonData['creditScore'] = getCreditScoreFromWsdl(jsonData['ssn'])
     jsonData['ssn'] = jsonData['ssn'].replace("-","")

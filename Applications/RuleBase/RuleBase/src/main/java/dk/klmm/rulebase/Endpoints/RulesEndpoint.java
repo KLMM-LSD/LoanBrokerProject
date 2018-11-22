@@ -44,22 +44,24 @@ public class RulesEndpoint {
                 Rules rabbitBank = new Rules();
                 rabbitBank.setName("GroupB.Svedbanken");
                 banks.add(rabbitBank);
-            } else if (((lAmount >= (double) 25000) && (lAmount <= (double) 50000)) && (creditScore >= 500) && ((lDuration <= 360) && (lDuration >= 0))){
+            } 
+            if (((lAmount >= (double) 25000)) && (creditScore >= 500) && ((lDuration <= 360) && (lDuration >= 0))){
                 Rules jsonBank = new Rules();
                 jsonBank.setName("GroupB.DatBank");
                 banks.add(jsonBank);
-            } else if (((lAmount >= (double) 10000) && (lAmount <= (double) 25000)) && (creditScore >= 250) && ((lDuration <= 360) && (lDuration >= 0))){
+            }
+            if (((lAmount >= (double) 10000)) && (creditScore >= 250) && ((lDuration <= 360) && (lDuration >= 0))){
                 Rules xmlBank = new Rules();
                 xmlBank.setName("GroupB.BongoBank");
                 banks.add(xmlBank);
-            } else if ((lAmount >= (double) 100) && (creditScore >= 0) && ((lDuration <= 360) && (lDuration >= 0))){
+            } 
+            if ((lAmount >= (double) 100) && (creditScore >= 0) && ((lDuration <= 360) && (lDuration >= 0))){
                 Rules webBank = new Rules();
                 webBank.setName("GroupB.Bankerot");
                 banks.add(webBank);
-            } else {
-                System.out.println("No Banks here!");
             }
         }
+        System.out.println(banks.size());
         return banks;
     }
 }
