@@ -17,7 +17,7 @@ __outputDicts = queue.Queue()
 __decisionTimeout = 30
     
     
-def consumeResponse(message, exchange):
+def consumeResponse(message):
     with message.process():
         dict = json.loads(message.body)
         
@@ -33,25 +33,27 @@ def consumeResponse(message, exchange):
         log(dict)
         print("Received loan quote")
         
-        return
+    return
 
 # NOT IMPLEMENTED
-def consumeRequest():
+def consumeRequest(message):
+    with message.process():
+        print(message.body)
     return
 
 def log(msgdict):
     with open('responses.log', 'a') as f:
         f.write(json.dumps(msgdict) + "\n")
 
-async def requestLoop(queue, exchange):
-    while False:
-        await asyncio.sleep(__timeout)
-        await queue.consume(partial(consumeRequest, exchange=exchange))
-
-async def responseLoop(queue, exchange):
+async def requestLoop(queue):
     while True:
         await asyncio.sleep(__timeout)
-        await queue.consume(partial(consumeResponse, exchange=exchange))
+        await queue.consume(partial(consumeRequest))
+
+async def responseLoop(queue):
+    while True:
+        await asyncio.sleep(__timeout)
+        await queue.consume(partial(consumeResponse))
         #Flushing in response loop to ensure speedy print()
         sys.stdout.flush()
 
@@ -59,7 +61,14 @@ async def outputLoop(exchange):
     while True:
         await asyncio.sleep(__timeout)
         while not __outputDicts.empty():
-            await toBrokerout(msg, exchange)
+            outdict = __outputDicts.get()
+            print("Sending on best quote: " + json.dumps(outdict))
+            try:
+                await toBrokerOut(outdict, exchange)
+            except Exception as e:
+                print("Failed to send message: " + str(e))
+            else:
+                print("Sent.")
         
 async def toBrokerOut(outdict, exchange):
     await exchange.publish(aio_pika.Message(body = json.dumps(outdict).encode()))
@@ -80,7 +89,7 @@ def bestLoanDecision(ssn, timeout):
         
         #Leave mbestRate on output queue, so it will be sent on
         __outputDicts.put(bestRate)
-            
+        
         #Then clear list so that new requests with this ssn will start the decision timer again
         __ssNumbers[ssn].clear()
         return
@@ -93,10 +102,10 @@ async def main(loop):
     
     tempinex = channel.declare_exchange(__inputexchangename, ExchangeType.DIRECT, passive=False, durable=True)
     tempoutex = channel.declare_exchange(__outputexchangename, ExchangeType.FANOUT, passive=False, durable=True)
-    tempin_request = channel.declare_queue(auto_delete=True, exclusive=False)
-    tempin_response = channel.declare_queue(auto_delete=True, exclusive=False)
-    
+    tempin_request = channel.declare_queue('GroupB.aggregator.request', auto_delete=True, exclusive=False)
+    tempin_response = channel.declare_queue('GroupB.aggregator.response', auto_delete=True, exclusive=False)
     inputexchange = await tempinex
+    
     outputexchange = await tempoutex
     inqueue_request = await tempin_request
     inqueue_response= await tempin_response
@@ -107,8 +116,8 @@ async def main(loop):
     # Ensuring Ctrl+C closes gratefully
     signal.signal(signal.SIGINT, signal.default_int_handler)
     try:
-        requestL = requestLoop(inqueue_request, outputexchange)
-        responseL = responseLoop(inqueue_response, outputexchange)
+        requestL = requestLoop(inqueue_request)
+        responseL = responseLoop(inqueue_response)
         outputL = outputLoop(outputexchange)
         #loop.create_task(jsonL)
         #loop.create_task(xmlL)
