@@ -30,12 +30,14 @@
 #### Run project
 To run this project you need some prerequisites. When running it'll start up all the individual components in the correct order.
 
+This project at the moment only runs with the jsonBank and the xmlBank. The Rabbimq bank and the web service bank wil be operational very soon as well as a Client.
+
 #### Prerequisites
 - Java 8
-- Python 3
-- C#
 - Maven
-- TBD
+- Python 3
+- .Net(C#)
+- Node.js
 
 #### Project execution
 1. Clone the project
