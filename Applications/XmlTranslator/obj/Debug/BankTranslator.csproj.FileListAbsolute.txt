@@ -118,3 +118,19 @@ C:\Users\Mart_\source\repos\BankTranslator\BankTranslator\bin\Debug\System.Net.H
 C:\Users\Mart_\source\repos\BankTranslator\BankTranslator\bin\Debug\WebApiContrib.Formatting.JavaScriptSerializer.dll
 C:\Users\Mart_\source\repos\BankTranslator\BankTranslator\bin\Debug\Newtonsoft.Json.xml
 C:\Users\Mart_\source\repos\BankTranslator\BankTranslator\bin\Debug\System.Net.Http.Formatting.xml
+C:\Users\Mart_\OneDrive\Skrivebord\Loan Broker Project\LoanBrokerProject\Applications\XmlTranslator\bin\Debug\BankTranslator.exe.config
+C:\Users\Mart_\OneDrive\Skrivebord\Loan Broker Project\LoanBrokerProject\Applications\XmlTranslator\bin\Debug\BankTranslator.exe
+C:\Users\Mart_\OneDrive\Skrivebord\Loan Broker Project\LoanBrokerProject\Applications\XmlTranslator\bin\Debug\BankTranslator.pdb
+C:\Users\Mart_\OneDrive\Skrivebord\Loan Broker Project\LoanBrokerProject\Applications\XmlTranslator\bin\Debug\netstandard.dll
+C:\Users\Mart_\OneDrive\Skrivebord\Loan Broker Project\LoanBrokerProject\Applications\XmlTranslator\bin\Debug\Microsoft.Diagnostics.Tracing.EventSource.xml
+C:\Users\Mart_\OneDrive\Skrivebord\Loan Broker Project\LoanBrokerProject\Applications\XmlTranslator\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Mart_\OneDrive\Skrivebord\Loan Broker Project\LoanBrokerProject\Applications\XmlTranslator\bin\Debug\RabbitMQ.Client.xml
+C:\Users\Mart_\OneDrive\Skrivebord\Loan Broker Project\LoanBrokerProject\Applications\XmlTranslator\bin\Debug\System.Net.Http.Formatting.xml
+C:\Users\Mart_\OneDrive\Skrivebord\Loan Broker Project\LoanBrokerProject\Applications\XmlTranslator\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\Mart_\OneDrive\Skrivebord\Loan Broker Project\LoanBrokerProject\Applications\XmlTranslator\bin\Debug\System.Threading.Channels.xml
+C:\Users\Mart_\OneDrive\Skrivebord\Loan Broker Project\LoanBrokerProject\Applications\XmlTranslator\bin\Debug\System.Threading.Tasks.Extensions.xml
+C:\Users\Mart_\OneDrive\Skrivebord\Loan Broker Project\LoanBrokerProject\Applications\XmlTranslator\obj\Debug\BankTranslator.csprojAssemblyReference.cache
+C:\Users\Mart_\OneDrive\Skrivebord\Loan Broker Project\LoanBrokerProject\Applications\XmlTranslator\obj\Debug\BankTranslator.csproj.CoreCompileInputs.cache
+C:\Users\Mart_\OneDrive\Skrivebord\Loan Broker Project\LoanBrokerProject\Applications\XmlTranslator\obj\Debug\BankTranslator.csproj.CopyComplete
+C:\Users\Mart_\OneDrive\Skrivebord\Loan Broker Project\LoanBrokerProject\Applications\XmlTranslator\obj\Debug\BankTranslator.exe
+C:\Users\Mart_\OneDrive\Skrivebord\Loan Broker Project\LoanBrokerProject\Applications\XmlTranslator\obj\Debug\BankTranslator.pdb

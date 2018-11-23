@@ -6,7 +6,6 @@
 package com.mycompany.recipientlist;
 
 import com.rabbitmq.client.*;
-import com.rabbitmq.client.AMQP.Queue;
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 import java.util.logging.Level;
@@ -22,7 +21,7 @@ import org.json.simple.parser.ParseException;
  */
 public class Main {
 
-    private static final String EXCHANGE_NAME = "GroupB.creditscore.exchange";
+    private static final String EXCHANGE_NAME = "GroupB.getBanks";
     private static final JSONParser jParser = new JSONParser();
     private static Channel channel;
     private static Connections conn;
@@ -37,7 +36,7 @@ public class Main {
     public static void listenForMessage() throws IOException, TimeoutException {
 
         channel = conn.getChannel();
-        channel.exchangeDeclare(EXCHANGE_NAME, "direct", true, false, null);
+        channel.exchangeDeclare(EXCHANGE_NAME, "fanout", true, false, null);
         String queueName = channel.queueDeclare().getQueue();
         channel.queueBind(queueName,
                 EXCHANGE_NAME,
@@ -51,6 +50,7 @@ public class Main {
 
                 String message = new String(body, "UTF-8");
                 JSONObject json = null;
+                System.out.println("I got a message: " + message);
 
                 try {
                     json = (JSONObject) jParser.parse(message);
@@ -59,45 +59,50 @@ public class Main {
                 }
 
                 JSONArray jArr = (JSONArray) json.get("banks");
-                sendToTranslate(jArr);
+                JSONObject loanInfo = json;
+                loanInfo.remove("banks");
+                sendToTranslate(jArr, loanInfo);
 
-                JSONObject toAgre = json;
-                sendToAggregator(toAgre);
+                sendToAggregator(message);
             }
         };
         channel.basicConsume(queueName, true, consumer);
     }
 
     // Forwards messages to the translators, as well as provides info to aggregator
-    private static void sendToTranslate(JSONArray array) {
+    @SuppressWarnings("empty-statement")
+    private static void sendToTranslate(JSONArray array, JSONObject jsonInfo) throws IOException {
+
         array.forEach(item -> {
             try {
-                JSONObject json = (JSONObject) item;
-                switch (json.get("BankName").toString().toLowerCase()) {
+                JSONObject obj = (JSONObject) item;
+                String bankName = obj.get("name").toString();
+
+                switch (bankName.toLowerCase()) {
                     case "bongobank":
-                        channel.basicPublish("GroupB.translators", "", null, json.toJSONString().getBytes());
-                        break;
-                    case "svedbanken":
-                        channel.basicPublish("", "", null, null);
+                       channel.basicPublish("GroupB.translators", "xml", null, jsonInfo.toJSONString().getBytes());
                         break;
                     case "datbank":
-                        //channel.basicPublish("", "", bp, bytes);
+                        channel.basicPublish("GroupB.translators", "DatBank", null, jsonInfo.toJSONString().getBytes());
                         break;
                     case "bankerot":
-                        //channel.basicPublish("", "", bp, bytes);
+                        //channel.basicPublish("GroupB.translators", "", bp, bytes);
+                        break;
+                    case "svedbanken":
+                        channel.basicPublish("GroupB.translators", "", null, "".getBytes());
                         break;
                     default:
                         System.out.println("Bank Ikke Genkendt");
                         break;
                 }
             } catch (IOException ex) {
-                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, "IOEXception in SendMessageToTranslators", ex);
+                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
     }
 
-    private static void sendToAggregator(JSONObject json) throws IOException {
-        System.out.println("I receieved this json: " + json);
-        channel.basicPublish("GroupB.aggregator", "", null, json.toJSONString().getBytes());
+    private static void sendToAggregator(String msg) throws IOException {
+        System.out.println("Send to aggregator: " + msg);
+        channel.basicPublish("GroupB.aggregator", "request", null, msg.getBytes());
     }
 }

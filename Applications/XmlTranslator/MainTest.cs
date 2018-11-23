@@ -34,12 +34,12 @@ namespace BankTranslator
             using (var connection = factory.CreateConnection())
             using (var channel = connection.CreateModel())
             {
-                channel.ExchangeDeclare(exchange: "GroupB.translators", type: "fanout", durable: true, autoDelete: false, arguments: null);
+                channel.ExchangeDeclare(exchange: "GroupB.translators", type: "direct", durable: true, autoDelete: false, arguments: null);
 
                 var queueName = channel.QueueDeclare().QueueName;
                 channel.QueueBind(queue: queueName,
                                   exchange: "GroupB.translators",
-                                  routingKey: "");
+                                  routingKey: "xml");
 
                 Console.WriteLine(" [*] Waiting for Message.");
 
@@ -61,11 +61,11 @@ namespace BankTranslator
                     Console.WriteLine("##################################" + doc.ToString());
                     var props = channel.CreateBasicProperties();
                     props.ReplyTo = "GroupB.normalizer.xml";
-                    props.CorrelationId = "bankXML";
-                    //channel.BasicPublish(exchange: "cphbusiness.bankXML",
-                    //             routingKey: "GroupB_CSharp",
-                    //             basicProperties: props,
-                    //             body: Encoding.Default.GetBytes(doc.ToString()));
+                    props.CorrelationId = "GroupB.BongoBank";
+                    channel.BasicPublish(exchange: "cphbusiness.bankXML",
+                                 routingKey: "GroupB_CSharp",
+                                 basicProperties: props,
+                                 body: Encoding.Default.GetBytes(doc.ToString()));
                 };
                     channel.BasicConsume(queue: queueName,
                                          autoAck: true,
