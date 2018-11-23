@@ -10,16 +10,16 @@ Generated on: 2018.11.22 at 05:43:21 PM CET
   -->
   <bindings scd="x-schema::tns" xmlns:tns="http://spring.io/guides/gs-producing-web-service">
     <schemaBindings map="false">
-      <package name="dk.klmm.rulebase.ruleClasses"/>
+      <package name="io.spring.guides.gs_producing_web_service.ruleClasses"/>
     </schemaBindings>
     <bindings scd="tns:GetRulesRequest">
-      <class ref="dk.klmm.rulebase.ruleClasses.GetRulesRequest"/>
+      <class ref="io.spring.guides.gs_producing_web_services.GetRulesRequest"/>
     </bindings>
     <bindings scd="tns:GetRulesResponse">
-      <class ref="dk.klmm.rulebase.ruleClasses.GetRulesResponse"/>
+      <class ref="io.spring.guides.gs_producing_web_service.GetRulesResponse"/>
     </bindings>
     <bindings scd="~tns:Rules">
-      <class ref="dk.klmm.rulebase.ruleClasses.Rules"/>
+      <class ref="io.spring.guides.gs_producing_web_service.Rules"/>
     </bindings>
   </bindings>
 </bindings>

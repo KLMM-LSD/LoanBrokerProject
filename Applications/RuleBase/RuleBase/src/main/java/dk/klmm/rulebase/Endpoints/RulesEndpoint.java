@@ -5,9 +5,9 @@
  */
 package dk.klmm.rulebase.Endpoints;
 
-import dk.klmm.rulebase.ruleClasses.GetRulesRequest;
-import dk.klmm.rulebase.ruleClasses.GetRulesResponse;
-import dk.klmm.rulebase.ruleClasses.Rules;
+import io.spring.guides.gs_producing_web_service.GetRulesRequest;
+import io.spring.guides.gs_producing_web_service.GetRulesResponse;
+import io.spring.guides.gs_producing_web_service.Rules;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;

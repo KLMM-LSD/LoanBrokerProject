@@ -6,7 +6,7 @@
 //
 
 
-package dk.klmm.rulebase.ruleClasses;
+package io.spring.guides.gs_producing_web_service;
 
 import java.util.ArrayList;
 import java.util.List;
