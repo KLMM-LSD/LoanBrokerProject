@@ -22,7 +22,7 @@ def consumeResponse(message):
         dict = json.loads(message.body)
         
         ssn = str(dict['ssn'])
-		dict['ssn'] = ssn
+        dict['ssn'] = ssn
         dict['bankId'] = str(message.correlation_id)[2:-1]
         interestRate = dict['interestRate']
             
