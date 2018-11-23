@@ -11,10 +11,10 @@ __outputexchangename = "GroupB.bestquote"
 __timeout = 1
 
 #Collection to keep all social security numbers in
-__ssNumbers = defaultdict(list)
+__ssNumbers = dict()
 __outputDicts = queue.Queue()
 #Time from first learning of an ssn, until a decision is made
-__decisionTimeout = 30
+
     
     
 def consumeResponse(message):
@@ -22,23 +22,40 @@ def consumeResponse(message):
         dict = json.loads(message.body)
         
         ssn = dict['ssn']
-        dict['bankID'] = str(message.correlation_id)
+        dict['bankId'] = str(message.correlation_id)[2:-1]
         interestRate = dict['interestRate']
             
-        if len(__ssNumbers[ssn]) == 0: #If ssn is unknown, schedule a decision for 1 timeout from now
-            decisionThread = threading.Thread(target=bestLoanDecision, args=(ssn, __decisionTimeout), daemon=True)
-            #This thread terminates on its own and daemon=True, so fire and forget.
-            decisionThread.start()
-        __ssNumbers[ssn].append({'ssn':ssn, 'interestRate':interestRate, 'bankID': dict['bankID']})
-        log(dict)
-        print("Received loan quote")
+        if ssn in __ssNumbers: #If ssn is known, append quote
+            try:
+                __ssNumbers[ssn]['quotes'].append({'interestRate':interestRate, 'bankId': dict['bankId']})
+                log(__ssNumbers[ssn])
+                print("Received loan quote")
+            except Exception as e:
+                print(e)
+        else:
+            print('Never heard of this ssn: ' + ssn)
         
     return
 
 # NOT IMPLEMENTED
 def consumeRequest(message):
     with message.process():
-        print(message.body)
+        d = json.loads(message.body)
+        ssn = d['ssn']
+        
+        if not ssn in __ssNumbers: #If ssn is unknown, schedule a decision for 1 timeout from now
+            
+            d['quotes'] = []
+            d.pop('creditScore', None)
+            
+            
+            waitTime = max(d['banks'], key= lambda d:d['timeout'])['timeout']
+            
+            __ssNumbers[ssn] = d
+            
+            decisionThread = threading.Thread(target=bestLoanDecision, args=(ssn, waitTime), daemon=True)
+            #This thread terminates on its own and daemon=True, so fire and forget.
+            decisionThread.start()
     return
 
 def log(msgdict):
@@ -71,29 +88,51 @@ async def outputLoop(exchange):
                 print("Sent.")
         
 async def toBrokerOut(outdict, exchange):
-    await exchange.publish(aio_pika.Message(body = json.dumps(outdict).encode()))
+    await exchange.publish(aio_pika.Message(body = json.dumps(outdict).encode()), routing_key='')
     return
     
 def bestLoanDecision(ssn, timeout):
-        print("This new thread just started going to sleep.")
+        print("This new thread just started going to sleep for " + str(timeout) + " seconds.")
         #First, wait for other responses to come in
         time.sleep(timeout)
         print("Woah, awake again!")
         #Then figure out where the best deal is at
-        bestRate = min(__ssNumbers[ssn], key= lambda d:d['interestRate'])
-        
-        #Send bestRate to destination (File for now)
-        with open(ssn + ".log", "w") as loanFile:
-            quoteCount = len(__ssNumbers[ssn])
-            loanFile.write("Best rate is " + str(bestRate['interestRate']) + " at " + str(bestRate['ssn']) + ", from " + str(quoteCount) + " quotes total\n")
-        
-        #Leave mbestRate on output queue, so it will be sent on
-        __outputDicts.put(bestRate)
-        
+        if __ssNumbers[ssn]['quotes']:
+            bestRate = min(__ssNumbers[ssn]['quotes'], key= lambda d:d['interestRate'])
+            print("Best rate: " + json.dumps(bestRate))
+            
+            #Send bestRate to destination (File for now)
+            with open(ssn + ".log", "w") as loanFile:
+                quoteCount = len(__ssNumbers[ssn]['quotes'])
+                loanFile.write("Best rate is " + str(bestRate['interestRate']) + " at " + ssn + ", from " + str(quoteCount) + " quotes total\n")
+            
+            bank = None
+            banks = __ssNumbers[ssn]['banks']
+            print(banks)
+            for d in  banks:
+                print(d)
+                if str(d['bankId']) == str(bestRate['bankId']):
+                    bank = d
+                    break
+            #bank = next(filter(lambda b: b['bankId'] == bestRate['bankId'], __ssNumbers[ssn]['banks']))
+            
+            outDict = {
+                        'ssn':ssn, 
+                        'loanAmount':__ssNumbers[ssn]['loanAmount'], 
+                        'loanDuration':__ssNumbers[ssn]['loanDuration'], 
+                        'bank':bank['name'], 
+                        'quote':bestRate['interestRate']
+                      }
+            
+            print(outDict)
+            
+            #Leave bestRate on output queue, so it will be sent on
+            __outputDicts.put(outDict)
+            
         #Then clear list so that new requests with this ssn will start the decision timer again
-        __ssNumbers[ssn].clear()
+        __ssNumbers[ssn].pop(ssn, None)
         return
-
+        
         
 async def main(loop):
     connection = await aio_pika.connect_robust("amqp://guest:guest@datdb.cphbusiness.dk:5672/", loop=loop)
