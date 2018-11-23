@@ -19,6 +19,7 @@ async def jsonQuote(message, exchange):
     with message.process():
         dict = json.loads(message.body)
         print(dict)
+		dict['ssn'] = str(dict['ssn'])
         await toAggregator(dict, exchange, message.correlation_id)
     return
 
