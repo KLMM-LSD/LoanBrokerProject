@@ -18,8 +18,8 @@ async def jsonQuote(message, exchange):
     print("JSON")
     with message.process():
         dict = json.loads(message.body)
-        print(dict)
         dict['ssn'] = str(dict['ssn'])
+        print(dict)
         await toAggregator(dict, exchange, message.correlation_id)
     return
 
@@ -28,7 +28,7 @@ async def xmlQuote(message, exchange):
     print("XML")
     with message.process():
         dict = {}
-        
+        print(message.body)
         root = ET.fromstring(message.body)
         dict['interestRate'] = float(root.find('interestRate').text)
         dict['ssn'] = str(root.find('ssn').text)
