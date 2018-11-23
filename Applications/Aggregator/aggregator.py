@@ -21,7 +21,8 @@ def consumeResponse(message):
     with message.process():
         dict = json.loads(message.body)
         
-        ssn = dict['ssn']
+        ssn = str(dict['ssn'])
+        dict['ssn'] = ssn
         dict['bankId'] = str(message.correlation_id)[2:-1]
         interestRate = dict['interestRate']
             
@@ -117,7 +118,7 @@ def bestLoanDecision(ssn, timeout):
             #bank = next(filter(lambda b: b['bankId'] == bestRate['bankId'], __ssNumbers[ssn]['banks']))
             
             outDict = {
-                        'ssn':ssn, 
+                        'ssn':int(ssn), 
                         'loanAmount':__ssNumbers[ssn]['loanAmount'], 
                         'loanDuration':__ssNumbers[ssn]['loanDuration'], 
                         'bank':bank['name'], 
