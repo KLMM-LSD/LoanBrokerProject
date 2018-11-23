@@ -89,11 +89,15 @@ Placeholder below.
 - [Aggregator](https://github.com/KLMM-LSD/LoanBrokerProject/tree/master/Applications/Aggregator)
 > The aggregator receives messages from the normalizer, when it has received each message (or after the timeout period), it sends the best quote back to the client, providing the best option for a loan. 
 
-## THIS WILL BE DONE VERY SOON!
+## Description of the Loan Broker Webservice
+
+## Identification of potential bottlenecks
 
 ## Process flow screen dumps
 TBD
 
-## Testing
+## Testability
 
-TBD
+## Design of seperation betweemn business and messaging logic
+
+## Error handling
