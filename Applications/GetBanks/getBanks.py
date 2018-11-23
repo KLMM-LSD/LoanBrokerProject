@@ -1,17 +1,21 @@
 import zeep
+from zeep import Settings
 import pika
 import json
 
+
 def requestSoapService(body):
-    wsdl = 'vores rules.wsdl fil'
+    wsdl = 'http://localhost:8081/ws/rules.wsdl'
     client = zeep.Client(wsdl=wsdl)
-    return client.service.GetDetails(int(body['loanAmount']), int(body['loanDuration']), int(body['creditScore']))
+    return client.service.GetRules(float(body['loanAmount']), int(body['loanDuration']), int(body['creditScore']))
+
 
 def addBanks(banks, json):
-    json['banks']=[]
-    for bank in banks.split(','):
-        json['banks'].append(bank)
+    json['banks'] = []
+    for bank in banks:
+        json['banks'].append(bank.name)
     return json
+
 
 def addBankToQueue(banks):
     connection = pika.BlockingConnection(pika.ConnectionParameters('datdb.cphbusiness.dk'))
@@ -21,14 +25,15 @@ def addBankToQueue(banks):
 
     channel.basic_publish(exchange='GroupB.getBanks', routing_key='', body=json.dumps(banks))
 
-    print(" [X] Sent: " (banks))
+    print(" [X] Sent: %r" % (banks))
     connection.close()
+
 
 def connect():
     connection = pika.BlockingConnection(pika.ConnectionParameters('datdb.cphbusiness.dk'))
     channel = connection.channel()
 
-    channel.exchange_declare(exchange='GroupB.creditscore.exchange', exchange_type='fanout')
+    channel.exchange_declare(exchange='GroupB.creditscore.exchange', exchange_type='fanout', durable='true')
 
     result = channel.queue_declare(exclusive=True)
     queue_name = result.method.queue
@@ -48,6 +53,7 @@ def callback(ch, method, properties, body):
     banks = requestSoapService(json.loads(body))
     jsonBody = addBanks(banks, json.loads(body))
     addBankToQueue(jsonBody)
+
 
 if __name__ == "__main__":
     connect()

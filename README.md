@@ -10,7 +10,7 @@
  - Michael Boje Veilis
  - Lasse André Hansen
  - Martin Hansen
- - kristjan reinert gásadal
+ - Kristjan Reinert Gásadal
 
 ---
 
@@ -43,7 +43,11 @@ To run this project you need some prerequisites. When running it'll start up all
 3. Run ``TBD``
 
 ### Design of the Loan Broker
-- Picture of our loan broker here!
+The loan broker application is designed to integrate multiple smaller components through a mixture of rabbitMQ messaging as well as SOAP webservices. The idea is to have every component loosely coupled together. This way, we can have multiple teams working on different components - without needing a high level of communication, because every message send from one component to another has a clear and predefined format. 
+
+Placeholder below.
+
+![diagram](https://raw.githubusercontent.com/KLMM-LSD/LoanBrokerProject/master/Resources/LoanBrokerDesign.JPG)
 
 ### Loan quote process flow
 1. Receive the consumer's loan quote request(ssn, loan amount, loan duration)
@@ -58,12 +62,36 @@ To run this project you need some prerequisites. When running it'll start up all
 - Client/Frontend
 > something something
 
-- Get Credit Score
-> something something
+- [Get Credit Score](https://github.com/KLMM-LSD/LoanBrokerProject/blob/master/Applications/GetCreditScore/getScore.py)
+> Get Credit score related to given Social Security Number
 
-TBD +
+- [Rule Base](https://github.com/KLMM-LSD/LoanBrokerProject/tree/master/Applications/RuleBase)
+> Sets the rules for each bank (Least amount of creditscore allowed etc.) 
+
+- [Get Banks](https://github.com/KLMM-LSD/LoanBrokerProject/tree/master/Applications/GetBanks)
+> To acquire all relevant banks (according to rulebase)
+
+- [Recipient List](https://github.com/KLMM-LSD/LoanBrokerProject/tree/master/Applications/RecipientList)
+> Delegates each request to the correct translator for each bank.
+
+- Translators
+> Formats the request to the correct format for each bank and sends the loanRequest, incl. 
+[XML-translator](https://github.com/KLMM-LSD/LoanBrokerProject/tree/master/Applications/TranslatorJson), [JSON-translator](https://github.com/KLMM-LSD/LoanBrokerProject/tree/master/Applications/TranslatorJson), [Webservice-translator](TBD) and [RabbitMQ-translator](TBD).
+
+- Banks 
+> 2 given banks accessible from http://datdb.cphbusiness.dk:15672 as well as the 2 banks we developed. [Webservice-Bank](https://github.com/KLMM-LSD/LoanBrokerProject/tree/master/Applications/bank_webservice) and [RabbitMQ-bank](https://github.com/KLMM-LSD/LoanBrokerProject/blob/master/Applications/Svedbanken/svedbanken.py).
+
+- [Normalizer](https://github.com/KLMM-LSD/LoanBrokerProject/blob/master/Applications/Normalizer/normalizer.py) 
+>  The normalizer makes sure that each message has the same format, a format that the aggregator can read. 
+
+- [Aggregator](https://github.com/KLMM-LSD/LoanBrokerProject/tree/master/Applications/Aggregator)
+> The aggregator receives messages from the normalizer, when it has received each message (or after the timeout period), it sends the best quote back to the client, providing the best option for a loan. 
 
 ## THIS WILL BE DONE VERY SOON!
 
 ## Process flow screen dumps
+TBD
+
+## Testing
+
 TBD
