@@ -35,12 +35,18 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Rules", propOrder = {
-    "name"
+    "name",
+    "bankId",
+    "timeout"
 })
 public class Rules {
 
     @XmlElement(required = true)
     protected String name;
+    @XmlElement(required = true)
+    protected String bankId;
+    @XmlElement(required = true)
+    protected Integer timeout;
 
     /**
      * Gets the value of the name property.
@@ -64,6 +70,22 @@ public class Rules {
      */
     public void setName(String value) {
         this.name = value;
+    }
+
+    public String getBankId() {
+        return bankId;
+    }
+
+    public void setBankId(String bankId) {
+        this.bankId = bankId;
+    }
+
+    public Integer getTimeout() {
+        return timeout;
+    }
+
+    public void setTimeout(Integer timeout) {
+        this.timeout = timeout;
     }
 
 }

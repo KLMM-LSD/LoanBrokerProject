@@ -13,7 +13,7 @@ def requestSoapService(body):
 def addBanks(banks, json):
     json['banks'] = []
     for bank in banks:
-        json['banks'].append(bank.name)
+        json['banks'].append({"name": bank.name, "bankId": bank.bankId, "timeout": bank.timeout})
     return json
 
 
