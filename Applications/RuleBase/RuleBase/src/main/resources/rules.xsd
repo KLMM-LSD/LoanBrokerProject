@@ -24,6 +24,8 @@
     <xs:complexType name="Rules">
         <xs:sequence>
             <xs:element name="name" type="xs:string"/>
+            <xs:element name="bankId" type="xs:string"/>
+            <xs:element name="timeout" type="xs:int"/>
         </xs:sequence>
     </xs:complexType>
 </xs:schema>

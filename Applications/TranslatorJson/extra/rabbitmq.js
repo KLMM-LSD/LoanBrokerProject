@@ -1,6 +1,6 @@
 module.exports = {
     consumer: {
-        type: 'fanout',
+        type: 'direct',
         exchange: 'GroupB.translators',
         binding: 'DatBank'
     },

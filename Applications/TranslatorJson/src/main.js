@@ -12,7 +12,7 @@ export function main() {
         if(err) {
             console.error(`[AMPQ] error:`, err.message);
 
-            return setTimeout(main(), 1000);
+            return setTimeout(main, 1000);
         }
         conn.on('error', (err) => {
             if(err.message !== 'Connection closing') {
@@ -21,7 +21,7 @@ export function main() {
         });
         conn.on('close', () => {
             console.error('[AMPQ] reconnecting');
-            return setTimeout(main(), 1000);
+            return setTimeout(main, 1000);
         });
         console.log('[AMPQ] connected - TranslatorJSON');
         consumer(conn);

@@ -5,7 +5,7 @@ import translator from './translator.js';
 export default function (ampqConn, message) {
     let replyTo = rabbitmq.producer.replyTo;
 
-    ampqConn.createChannel((ch, err) => {
+    ampqConn.createChannel((err, ch) => {
         let timeStamp = timestamp.getTimeStamp();
         if(err) {
             ampqConn.close();
@@ -20,7 +20,7 @@ export default function (ampqConn, message) {
             type,
             bankID
         };
-
+ 
         ch.assertExchange(ex, exType, {
             durable: false
         });

@@ -5,10 +5,10 @@ module.exports.getFormattedJson = function(jsonObject) {
     let loanDuration = jsonObject.loanDuration || 365;
 
     let formattedJson = {
-        ssn,
+        loanDuration,
         creditScore,
         loanAmount,
-        loanDuration
+        ssn
     };
 
     return formattedJson;
