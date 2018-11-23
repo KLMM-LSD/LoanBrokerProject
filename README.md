@@ -44,7 +44,7 @@ This project at the moment only runs with the jsonBank and the xmlBank. The Rabb
 2. ``cd`` into the root directory
 3. Run ``TBD``
 
-### Design of the Loan Broker with seperation betweemn business and messaging logic
+### Design of the Loan Broker with seperation between business and messaging logic
 The loan broker application is designed to integrate multiple smaller components through a mixture of rabbitMQ messaging as well as SOAP webservices. The idea is to have every component loosely coupled together. This way, we can have multiple teams working on different components - without needing a high level of communication, because every message send from one component to another has a clear and predefined format. 
 
 Placeholder below.
