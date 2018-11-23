@@ -117,7 +117,7 @@ def bestLoanDecision(ssn, timeout):
             #bank = next(filter(lambda b: b['bankId'] == bestRate['bankId'], __ssNumbers[ssn]['banks']))
             
             outDict = {
-                        'ssn':ssn, 
+                        'ssn':int(ssn), 
                         'loanAmount':__ssNumbers[ssn]['loanAmount'], 
                         'loanDuration':__ssNumbers[ssn]['loanDuration'], 
                         'bank':bank['name'], 

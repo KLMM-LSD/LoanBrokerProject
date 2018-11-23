@@ -30,7 +30,7 @@ async def xmlQuote(message, exchange):
         
         root = ET.fromstring(message.body)
         dict['interestRate'] = float(root.find('interestRate').text)
-        dict['ssn'] = root.find('ssn').text
+        dict['ssn'] = str(root.find('ssn').text)
         print(dict)
         await toAggregator(dict, exchange, message.correlation_id)
     return
