@@ -62,21 +62,21 @@ This project at the moment only runs with the jsonBank and the xmlBank. The Rabb
 2. Navigate to the projects root folder.
 3. Run these scripts with your path to /applications as an argument, i.e. :  
 
-##### LoanBroker startup script 
+##### LoanBroker startup script from droplet and for ubuntu users
 ```From droplet
 ./startScript.sh $PWD/Applications
 ```
-##### Builds components and starts external ones
+##### Builds components and starts components for your windows host machine
 ```For the host-machine
 ./buildscript.sh $PWD/Applications
 ./startScriptHost.sh $PWD/Applications
 ```
 ##### Sends messages through the system on a loop
-```From droplet
+```simulation
 ./simulate.sh $PWD/Applications
 ```
 ##### Kills all components started by startScript.sh
-```From droplet
+```kills
 ./killScript $PWD/Applications
 ```
 
