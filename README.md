@@ -15,13 +15,26 @@
 ---
 
 ### Table of content
-- [Loan Broker Documentation](#Loan-Broker-Documentation)
-- [Design of the Loan Broker with seperation between business and messaging logic](#Design-of-the-Loan-Broker-with-seperation-between-business-and-messaging-logic)
-- TBD
+<!--ts-->
+* [Loan Broker Documentation](#Loan-Broker-Documentation)
+* [Running the Loan Broker process](#Running-the-Loan-Broker-process)
+  * [Prerequisites](#Prerequisites)
+  * [Running the application (smart)](#Running-the-application-smart)
+  * [Running the application (Manual)](#Running-the-application-Manual)
+* [Design of the Loan Broker with seperation between business and messaging logic](#Design-of-the-Loan-Broker-with-seperation-between-business-and-messaging-logic)
+  * [Loan quote process flow](#Loan-quote-process-flow)
+  * [Process flow screen dumps](#Process-flow-screen-dumps)
+  * [Components in the Loan Broker and External components](#Components-in-the-Loan-Broker-and-External-components)
+* [Description of the Loan Broker Webservice](#Description-of-the-Loan-Broker-Webservice)
+* [Identification of potential bottlenecks](#Identification-of-potential-bottlenecks)
+* [Testability](#Testability)
+* [Error handling](#Error-handling)
+  
+<!--ts-->
 
 ---
 
-## 1. Loan Broker Documentation
+## Loan Broker Documentation
 > See the full description of the Loan Broker project here: https://github.com/KLMM-LSD/LoanBrokerProject/blob/master/docs/Loan%20Broker%20Project.pdf
 > 
 > The link mostly explains what the Loan Broker is and what has to be done to make it.
@@ -49,7 +62,7 @@ This project at the moment only runs with the jsonBank and the xmlBank. The Rabb
 ```
 ./startScript.sh "C:/user/loanbroker/applications" 
 ```
-#### Running the application (Manual/simple)
+#### Running the application (Manual)
 1. First clone the project.
 2. Go into the Applications folder where you can see all the internal and external components.
 3. Go to RuleBase/RuleBase, if you don't have a target jar file yet do an **mvn compile** and then an **mvn clean package** command and then go to **target** folder to run this command: **java -jar RuleBase-1.0-SNAPSHOT.jar**.
@@ -73,7 +86,7 @@ Placeholder below.
 
 ![diagram](https://raw.githubusercontent.com/KLMM-LSD/LoanBrokerProject/master/Resources/LoanBrokerDesign.JPG)
 
-### Loan quote process flow
+#### Loan quote process flow
 1. Receive the consumer's loan quote request(ssn, loan amount, loan duration)
 2. Obtain credit score from credit agency(ssn -> credit score)
 3. Determine the most appropriate banks to contact from the Rule Base web service
@@ -82,7 +95,10 @@ Placeholder below.
 6. Detemine the best response
 7. Pass the result back to the consumer
 
-### Components in the Loan Broker and External components
+#### Process flow screen dumps
+TBD
+
+#### Components in the Loan Broker and External components
 - Client/Frontend
 > something something
 
@@ -111,13 +127,18 @@ Placeholder below.
 - [Aggregator](https://github.com/KLMM-LSD/LoanBrokerProject/tree/master/Applications/Aggregator)
 > The aggregator receives messages from the normalizer, when it has received each message (or after the timeout period), it sends the best quote back to the client, providing the best option for a loan. 
 
-## Description of the Loan Broker Webservice
+---
 
-## Identification of potential bottlenecks
+### Description of the Loan Broker Webservice
 
-## Process flow screen dumps
-TBD
+---
 
-## Testability
+### Identification of potential bottlenecks
 
-## Error handling
+---
+
+### Testability
+
+---
+
+### Error handling
