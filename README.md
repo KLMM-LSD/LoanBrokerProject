@@ -48,7 +48,6 @@ This project at the moment only runs with the jsonBank and the xmlBank. The Rabb
 #### Prerequisites
 - Java 8
 - Maven
-- Either Glassfish, Tomcat or Wildfly as local server
 - Python 3
 - .Net(C#)
 - Node.js
