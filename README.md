@@ -75,7 +75,7 @@ This project at the moment only runs with the jsonBank and the xmlBank. The Rabb
 10. Go to Aggregator folder and start this component with this command: **sh runScript.sh** or **./runScript.sh**
 11. Last go to GetCreditScore folder and try and send a request to see if it goes through everything: **python getScore.py 123456-7899 50000 30**
 
-#### At the moment you send credit score from the the GetCreditScore component and receive the response from the aggregator. This willl change when we get a Client up and running. Same with two of the banks, only two banks work atm. but all four will be up and running soon aswell
+#### At the moment you send credit score from the the GetCreditScore component and receive the response from the aggregator. This will change when we get a Client up and running. Same with the bank Bankerot, only this one bank doesn't work atm. but all four will be up and running soon aswell
 
 ---
 
