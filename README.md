@@ -60,7 +60,7 @@ This project at the moment only runs with the jsonBank and the xmlBank. The Rabb
 3. Run the script with your path to /applications as an argument, i.e. :  
 
 ```
-./startScript.sh "C:/user/loanbroker/applications" 
+./startScript.sh $PWD/Applications
 ```
 #### Running the application (Manual)
 1. First clone the project.
