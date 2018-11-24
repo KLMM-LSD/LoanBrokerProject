@@ -1,7 +1,7 @@
 #!/bin/bash
 
 cd "$1/GetCreditScore/"
-while True
+while :
 do
 	sleep 5
 	#Run GetCreditScore
