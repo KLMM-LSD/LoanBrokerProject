@@ -20,7 +20,9 @@ printf "$!\n" >> "$1/.PIDs.log"
 
 # Run XML Translator
 cd "$1/DotnetTranslator/"
-dotnet run & 
+dotnet build
+cd bin/Debug/netcoreapp2.1
+dotnet DotnetTranslator.dll
 printf "$!\n" >> "$1/.PIDs.log"
 
 # Run JsonTranslator
