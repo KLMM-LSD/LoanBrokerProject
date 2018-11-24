@@ -67,7 +67,7 @@ This project at the moment only runs with the jsonBank and the xmlBank. The Rabb
 2. Go into the Applications folder where you can see all the internal and external components.
 3. Go to RuleBase/RuleBase and start this component with these commands: **mvn clean package** and then **mvn spring-boot:run**.
 4. Go to GetBanks folder and start this component with this command: **python getBanks.py**.
-5. Go to Recipientlist folder and start this component with this command: **mvn exec:java**.
+5. Go to Recipientlist folder and start this component with these commands: **mvn clean package** and then **mvn exec:java**.
 6. Go to xmlTranslator folder and start this component with this command: **dotnet run**.
 7. Go to translatorjson folder and start this component with this command: **npm install** => **npm start**.
 8. other translators **TBD**
