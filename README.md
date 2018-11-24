@@ -86,7 +86,7 @@ Navigate into the Applications/RuleBase/RuleBase folder and run the commands: "m
 Navigate into the Applications/Svedbanken folder and run the command: "python svedbanken.py"
 ```
 
-#### Running the application (Manual)
+#### Running the application (Manually)
 1. First clone the project.
 2. Go into the Applications folder where you can see all the internal and external components.
 3. Go to RuleBase/RuleBase and start this component with these commands: **mvn clean package** and then **mvn spring-boot:run**.
