@@ -66,15 +66,15 @@ This project at the moment only runs with the jsonBank and the xmlBank. The Rabb
 1. First clone the project.
 2. Go into the Applications folder where you can see all the internal and external components.
 3. Go to RuleBase/RuleBase and start this component with these commands: **mvn clean package** and then **mvn spring-boot:run**.
-4. Go to the folder svedbanken and start this rabbitmq bank with this command: **python3 svedbanken.py**
-4. Go to GetBanks folder and start this component with this command: **python3 getBanks.py**.
+4. Go to the folder svedbanken and start this rabbitmq bank with this command: **python svedbanken.py**
+4. Go to GetBanks folder and start this component with this command: **python getBanks.py**.
 5. Go to Recipientlist folder and start this component with these commands: **mvn clean package** and then **mvn exec:java**.
 6. Go to xmlTranslator folder and start this component with these commands: **dotnet build** => **cd bin/Debug/netcoreapp2.1** => **dotnet DotnetTranslator.dll**.
 7. Go to translatorjson folder and start this component with this command: **npm install** => **npm start**.
 8. other translators **TBD**
-9. Go to Normalizer folder and start this component with this command: **python3 nomralizer.py**
-10. Go to Aggregator folder and start this component with this command: **python3 aggregator.py**
-11. Last go to GetCreditScore folder and try and send a request to see if it goes through everything: **python3 getScore.py 123456-7899 50000 30**
+9. Go to Normalizer folder and start this component with this command: **python nomralizer.py**
+10. Go to Aggregator folder and start this component with this command: **python aggregator.py**
+11. Last go to GetCreditScore folder and try and send a request to see if it goes through everything: **python getScore.py 123456-7899 50000 30**
 
 #### At the moment you send credit score from the the GetCreditScore component and receive the response from the aggregator. This will change when we get a Client up and running. Same with the bank Bankerot and the translators for the rabbitmq bank and webservice bank, only these three components doesn't really work yet atm. but all of them will be up and running soon aswell
 
