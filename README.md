@@ -66,10 +66,10 @@ This project at the moment only runs with the jsonBank and the xmlBank. The Rabb
 ./buildscript.sh $PWD/Applications
 ./startScriptHost.sh $PWD/Applications
 ```
-**You have to manually start the external components for now but will be changed in to a script later**
+- You have to manually start the external components for now but will be changed in to a script later
 ```Manual start of external components
-Navigate into the Applications/RuleBase/RuleBase folder and run the commands: **mvn clean package** => **mvn spring-boot:run**
-Navigate into the Applications/Svedbanken folder and run the command: **python svedbanken.py**
+Navigate into the Applications/RuleBase/RuleBase folder and run the commands: "mvn clean package" => "mvn spring-boot:run"
+Navigate into the Applications/Svedbanken folder and run the command: "python svedbanken.py"
 ```
 
 #### Running the application (Manual)
