@@ -16,7 +16,7 @@
 
 ### Table of content
 - [Loan Broker Documentation](#Loan-Broker-Documentation)
-- TBD
+- [Design of the Loan Broker with seperation between business and messaging logic](#Design-of-the-Loan-Broker-with-seperation-between-business-and-messaging-logic)
 - TBD
 
 ---
