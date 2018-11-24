@@ -49,6 +49,9 @@ This project at the moment only runs with the jsonBank and the xmlBank. The Rabb
 - Java 8
 - Maven
 - Python 3
+    * pika
+    * aio_pika
+    * zeep
 - .Net(C#)
 - Node.js
 
