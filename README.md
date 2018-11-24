@@ -64,6 +64,8 @@ This project at the moment only runs with the jsonBank and the xmlBank. The Rabb
 
 #### At the moment you send credit score from the the GetCreditScore component and receive the response from the aggregator. This willl change when we get a Client up and running. Same with two of the banks, only two banks work atm. but all four will be up and running soon aswell
 
+---
+
 ### Design of the Loan Broker with seperation between business and messaging logic
 The loan broker application is designed to integrate multiple smaller components through a mixture of rabbitMQ messaging as well as SOAP webservices. The idea is to have every component loosely coupled together. This way, we can have multiple teams working on different components - without needing a high level of communication, because every message send from one component to another has a clear and predefined format. 
 
