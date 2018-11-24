@@ -68,7 +68,7 @@ This project at the moment only runs with the jsonBank and the xmlBank. The Rabb
 3. Go to RuleBase/RuleBase and start this component with these commands: **mvn clean package** and then **mvn spring-boot:run**.
 4. Go to GetBanks folder and start this component with this command: **python getBanks.py**.
 5. Go to Recipientlist folder and start this component with these commands: **mvn clean package** and then **mvn exec:java**.
-6. Go to xmlTranslator folder and start this component with this command: **dotnet run**.
+6. Go to xmlTranslator folder and start this component with these commands: **dotnet build** => **cd bin/Debug/netcoreapp2.1** => **dotnet DotnetTranslator.dll**.
 7. Go to translatorjson folder and start this component with this command: **npm install** => **npm start**.
 8. other translators **TBD**
 9. Go to Normalizer folder and start this component with this command: **python nomralizer.py**
