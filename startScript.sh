@@ -6,10 +6,10 @@
 # Run RuleBase
 cd "$1/RuleBase/target"
 java -jar RuleBase-1.0-SNAPSHOT.jar &
-printf "$!\n" > "$1/.PIDs.log"
+printf "$!\n" >> "$1/.PIDs.log"
 
 # Run GetBanks
-cd "$1/getBanks"
+cd "$1/GetBanks"
 python3 getBanks.py &
 printf "$!\n" >> "$1/.PIDs.log"
 

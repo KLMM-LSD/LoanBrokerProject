@@ -7,3 +7,6 @@ do
 	sleep 1
 	kill "$line"
 done < "$1/.PIDs.log"
+
+#Then empty out the file
+echo "" > "$1/.PIDs.log"
