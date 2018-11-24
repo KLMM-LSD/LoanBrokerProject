@@ -20,7 +20,7 @@
 * [Running the Loan Broker process](#Running-the-Loan-Broker-process)
   * [Prerequisites](#Prerequisites)
   * [Running the application (smart)](#Running-the-application-smart)
-  * [Running the application (Manual/simple)](#Running-the-application-Manual-simple)
+  * [Running the application (Manual)](#Running-the-application-Manual)
 * [Design of the Loan Broker with seperation between business and messaging logic](#Design-of-the-Loan-Broker-with-seperation-between-business-and-messaging-logic)
   * [Loan quote process flow](#Loan-quote-process-flow)
   * [Process flow screen dumps](#Process-flow-screen-dumps)
@@ -62,7 +62,7 @@ This project at the moment only runs with the jsonBank and the xmlBank. The Rabb
 ```
 ./startScript.sh "C:/user/loanbroker/applications" 
 ```
-#### Running the application (Manual/simple)
+#### Running the application (Manual)
 1. First clone the project.
 2. Go into the Applications folder where you can see all the internal and external components.
 3. Go to RuleBase/RuleBase, if you don't have a target jar file yet do an **mvn compile** and then an **mvn clean package** command and then go to **target** folder to run this command: **java -jar RuleBase-1.0-SNAPSHOT.jar**.
