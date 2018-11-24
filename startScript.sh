@@ -3,11 +3,6 @@
 #Making sure to kill all runnning processes first
 ./killScript.sh "$1"
 
-# Run RuleBase
-cd "$1/RuleBase/RuleBase/target"
-java -jar RuleBase-1.0-SNAPSHOT.jar &
-printf "$!\n" >> "$1/.PIDs.log"
-
 # Run GetBanks
 cd "$1/GetBanks"
 python3 getBanks.py &
@@ -44,8 +39,4 @@ cd "$1/Aggregator"
 python3 aggregator.py &
 printf "$!\n" >> "$1/.PIDs.log"
 
-#Run Svedbanken
-cd "$1/Svedbanken"
-python3 svedbanken.py &
-printf "$!\n" >> "$1/.PIDs.log"
 
