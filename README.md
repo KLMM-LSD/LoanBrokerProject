@@ -129,10 +129,16 @@ TBD
 
 ---
 
-## Description of the Loan Broker Webservice
+### Description of the Loan Broker Webservice
 
-## Identification of potential bottlenecks
+---
 
-## Testability
+### Identification of potential bottlenecks
 
-## Error handling
+---
+
+### Testability
+
+---
+
+### Error handling
