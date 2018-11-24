@@ -27,7 +27,7 @@
 > The link mostly explains what the Loan Broker is and what has to be done to make it.
 > It comes from the book Enterprise Integration Patterns, it takes a loan request, determines the best banks that would grant the user a loan with a corresponding interest rate. The request will go through many independent components to the banks, aswell as the responses from the banks. This is described further below.
 
-#### Run project
+### Running the Loan Broker process
 To run this project you need some prerequisites. When running it'll start up all the individual components in the correct order.
 
 This project at the moment only runs with the jsonBank and the xmlBank. The Rabbimq bank and the web service bank wil be operational very soon as well as a Client.
@@ -39,7 +39,7 @@ This project at the moment only runs with the jsonBank and the xmlBank. The Rabb
 - .Net(C#)
 - Node.js
 
-### Running the Loan Broker process
+
 #### Running the application (smart)
  
 1. First clone the project.
