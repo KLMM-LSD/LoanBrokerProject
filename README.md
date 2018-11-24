@@ -61,6 +61,11 @@ This project at the moment only runs with the jsonBank and the xmlBank. The Rabb
 1. First clone the project.
 2. Navigate to the projects root folder.
 3. Run these scripts with your path to /applications as an argument, i.e. :  
+- **NOTE** You have to manually start the external components for now but will be changed in to a script later
+```Manual start of external components
+Navigate into the Applications/RuleBase/RuleBase folder and run the commands: "mvn clean package" => "mvn spring-boot:run"
+Navigate into the Applications/Svedbanken folder and run the command: "python svedbanken.py"
+```
 
 ##### LoanBroker startup script from droplet and for ubuntu users
 ```From droplet
@@ -78,12 +83,6 @@ This project at the moment only runs with the jsonBank and the xmlBank. The Rabb
 ##### Kills all components started by startScript.sh
 ```kills
 ./killScript $PWD/Applications
-```
-
-- You have to manually start the external components for now but will be changed in to a script later
-```Manual start of external components
-Navigate into the Applications/RuleBase/RuleBase folder and run the commands: "mvn clean package" => "mvn spring-boot:run"
-Navigate into the Applications/Svedbanken folder and run the command: "python svedbanken.py"
 ```
 
 #### Running the application (Manually)
