@@ -27,7 +27,7 @@
 > The link mostly explains what the Loan Broker is and what has to be done to make it.
 > It comes from the book Enterprise Integration Patterns, it takes a loan request, determines the best banks that would grant the user a loan with a corresponding interest rate. The request will go through many independent components to the banks, aswell as the responses from the banks. This is described further below.
 
-#### Run project
+### Running the Loan Broker process
 To run this project you need some prerequisites. When running it'll start up all the individual components in the correct order.
 
 This project at the moment only runs with the jsonBank and the xmlBank. The Rabbimq bank and the web service bank wil be operational very soon as well as a Client.
@@ -39,7 +39,8 @@ This project at the moment only runs with the jsonBank and the xmlBank. The Rabb
 - .Net(C#)
 - Node.js
 
-#### Running the application
+
+#### Running the application (smart)
  
 1. First clone the project.
 2. Navigate to the projects root folder.
@@ -48,6 +49,22 @@ This project at the moment only runs with the jsonBank and the xmlBank. The Rabb
 ```
 ./startScript.sh "C:/user/loanbroker/applications" 
 ```
+#### Running the application (Manual/simple)
+1. First clone the project.
+2. Go into the Applications folder where you can see all the internal and external components.
+3. Go to RuleBase/RuleBase, if you don't have a target jar file yet do an **mvn compile** and then an **mvn clean package** command and then go to **target** folder to run this command: **java -jar RuleBase-1.0-SNAPSHOT.jar**.
+4. Go to GetBanks folder and start this component with this command: **python getBanks.py**.
+5. Go to Recipientlist folder and start this component with this command: **mvn exec:java**.
+6. Go to xmlTranslator folder and start this component with this command: **dotnet run**.
+7. Go to translatorjson folder and start this component with this command: **npm install** => **npm start**.
+8. other translators **TBD**
+9. Go to Normalizer folder and start this component with this command: **python nomralizer.py**
+10. Go to Aggregator folder and start this component with this command: **sh runScript.sh** or **./runScript.sh**
+11. Last go to GetCreditScore folder and try and send a request to see if it goes through everything: **python getScore.py 123456-7899 50000 30**
+
+#### At the moment you send credit score from the the GetCreditScore component and receive the response from the aggregator. This willl change when we get a Client up and running. Same with two of the banks, only two banks work atm. but all four will be up and running soon aswell
+
+---
 
 ### Design of the Loan Broker with seperation between business and messaging logic
 The loan broker application is designed to integrate multiple smaller components through a mixture of rabbitMQ messaging as well as SOAP webservices. The idea is to have every component loosely coupled together. This way, we can have multiple teams working on different components - without needing a high level of communication, because every message send from one component to another has a clear and predefined format. 
