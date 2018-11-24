@@ -39,10 +39,15 @@ This project at the moment only runs with the jsonBank and the xmlBank. The Rabb
 - .Net(C#)
 - Node.js
 
-#### Project execution
-1. Clone the project
-2. ``cd`` into the root directory
-3. 
+#### Running the application
+ 
+1. First clone the project.
+2. Navigate to the projects root folder.
+3. Run the script with your path to /applications as an argument, i.e. :  
+
+```
+./startScript.sh "C:/user/loanbroker/applications" 
+```
 
 ### Design of the Loan Broker with seperation between business and messaging logic
 The loan broker application is designed to integrate multiple smaller components through a mixture of rabbitMQ messaging as well as SOAP webservices. The idea is to have every component loosely coupled together. This way, we can have multiple teams working on different components - without needing a high level of communication, because every message send from one component to another has a clear and predefined format. 
@@ -88,17 +93,6 @@ Placeholder below.
 
 - [Aggregator](https://github.com/KLMM-LSD/LoanBrokerProject/tree/master/Applications/Aggregator)
 > The aggregator receives messages from the normalizer, when it has received each message (or after the timeout period), it sends the best quote back to the client, providing the best option for a loan. 
-
-## Running the application
- 
-1. First clone the project.
-2. Navigate to the projects root folder.
-3. Run the script with your path to /applications as an argument, i.e. :  
-
-```
-./startScript.sh "C:/user/loanbroker/applications" 
-```
-
 
 ## Description of the Loan Broker Webservice
 
