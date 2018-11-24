@@ -1,7 +1,7 @@
 #!/bin/bash     
  
 # Run RuleBase
-cd "$1/RuleBase"
+cd "$1/RuleBase/target"
 java -jar RuleBase-1.0-SNAPSHOT.jar &
 
 # Run GetBanks
