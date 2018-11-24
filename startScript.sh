@@ -4,7 +4,7 @@
 ./killScript.sh "$1"
 
 # Run RuleBase
-cd "$1/RuleBase/target"
+cd "$1/RuleBase/RuleBase/target"
 java -jar RuleBase-1.0-SNAPSHOT.jar &
 printf "$!\n" >> "$1/.PIDs.log"
 
@@ -22,7 +22,7 @@ printf "$!\n" >> "$1/.PIDs.log"
 cd "$1/DotnetTranslator/"
 dotnet build
 cd bin/Debug/netcoreapp2.1
-dotnet DotnetTranslator.dll
+dotnet DotnetTranslator.dll &
 printf "$!\n" >> "$1/.PIDs.log"
 
 # Run JsonTranslator
