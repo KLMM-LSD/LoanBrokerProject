@@ -9,3 +9,14 @@ C:\Users\Mart_\OneDrive\Skrivebord\DotnetTranslator\obj\Debug\netcoreapp2.1\Dotn
 C:\Users\Mart_\OneDrive\Skrivebord\DotnetTranslator\obj\Debug\netcoreapp2.1\DotnetTranslator.AssemblyInfo.cs
 C:\Users\Mart_\OneDrive\Skrivebord\DotnetTranslator\obj\Debug\netcoreapp2.1\DotnetTranslator.dll
 C:\Users\Mart_\OneDrive\Skrivebord\DotnetTranslator\obj\Debug\netcoreapp2.1\DotnetTranslator.pdb
+C:\Users\Mart_\OneDrive\Skrivebord\Loan Broker Project\LoanBrokerProject\Applications\DotnetTranslator\bin\Debug\netcoreapp2.1\DotnetTranslator.deps.json
+C:\Users\Mart_\OneDrive\Skrivebord\Loan Broker Project\LoanBrokerProject\Applications\DotnetTranslator\bin\Debug\netcoreapp2.1\DotnetTranslator.runtimeconfig.json
+C:\Users\Mart_\OneDrive\Skrivebord\Loan Broker Project\LoanBrokerProject\Applications\DotnetTranslator\bin\Debug\netcoreapp2.1\DotnetTranslator.runtimeconfig.dev.json
+C:\Users\Mart_\OneDrive\Skrivebord\Loan Broker Project\LoanBrokerProject\Applications\DotnetTranslator\bin\Debug\netcoreapp2.1\DotnetTranslator.dll
+C:\Users\Mart_\OneDrive\Skrivebord\Loan Broker Project\LoanBrokerProject\Applications\DotnetTranslator\bin\Debug\netcoreapp2.1\DotnetTranslator.pdb
+C:\Users\Mart_\OneDrive\Skrivebord\Loan Broker Project\LoanBrokerProject\Applications\DotnetTranslator\obj\Debug\netcoreapp2.1\DotnetTranslator.csprojAssemblyReference.cache
+C:\Users\Mart_\OneDrive\Skrivebord\Loan Broker Project\LoanBrokerProject\Applications\DotnetTranslator\obj\Debug\netcoreapp2.1\DotnetTranslator.csproj.CoreCompileInputs.cache
+C:\Users\Mart_\OneDrive\Skrivebord\Loan Broker Project\LoanBrokerProject\Applications\DotnetTranslator\obj\Debug\netcoreapp2.1\DotnetTranslator.AssemblyInfoInputs.cache
+C:\Users\Mart_\OneDrive\Skrivebord\Loan Broker Project\LoanBrokerProject\Applications\DotnetTranslator\obj\Debug\netcoreapp2.1\DotnetTranslator.AssemblyInfo.cs
+C:\Users\Mart_\OneDrive\Skrivebord\Loan Broker Project\LoanBrokerProject\Applications\DotnetTranslator\obj\Debug\netcoreapp2.1\DotnetTranslator.dll
+C:\Users\Mart_\OneDrive\Skrivebord\Loan Broker Project\LoanBrokerProject\Applications\DotnetTranslator\obj\Debug\netcoreapp2.1\DotnetTranslator.pdb
