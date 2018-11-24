@@ -1,0 +1,31 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+           xmlns:tns="http://spring.io/guides/gs-producing-web-service"
+           targetNamespace="http://spring.io/guides/gs-producing-web-service" 
+           elementFormDefault="qualified">
+
+    <xs:element name="GetRulesRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="loanAmount" type="xs:double"/>
+                <xs:element name="loanDuration" type="xs:int"/>
+                <xs:element name="creditScore" type="xs:int"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="GetRulesResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Rules" type="tns:Rules" maxOccurs="unbounded" minOccurs="0"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="Rules">
+        <xs:sequence>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="bankId" type="xs:string"/>
+            <xs:element name="timeout" type="xs:int"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

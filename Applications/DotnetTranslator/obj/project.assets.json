@@ -4228,11 +4228,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Mart_\\OneDrive\\Skrivebord\\Loan Broker Project\\LoanBrokerProject\\Applications\\DotnetTranslator\\DotnetTranslator.csproj",
+      "projectUniqueName": "C:\\Users\\Mart_\\OneDrive\\Skrivebord\\DotnetTranslator\\DotnetTranslator.csproj",
       "projectName": "DotnetTranslator",
-      "projectPath": "C:\\Users\\Mart_\\OneDrive\\Skrivebord\\Loan Broker Project\\LoanBrokerProject\\Applications\\DotnetTranslator\\DotnetTranslator.csproj",
+      "projectPath": "C:\\Users\\Mart_\\OneDrive\\Skrivebord\\DotnetTranslator\\DotnetTranslator.csproj",
       "packagesPath": "C:\\Users\\Mart_\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Mart_\\OneDrive\\Skrivebord\\Loan Broker Project\\LoanBrokerProject\\Applications\\DotnetTranslator\\obj\\",
+      "outputPath": "C:\\Users\\Mart_\\OneDrive\\Skrivebord\\DotnetTranslator\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
