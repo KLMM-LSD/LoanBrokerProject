@@ -65,7 +65,7 @@ This project at the moment only runs with the jsonBank and the xmlBank. The Rabb
 #### Running the application (Manual)
 1. First clone the project.
 2. Go into the Applications folder where you can see all the internal and external components.
-3. Go to RuleBase/RuleBase, if you don't have a target jar file yet do an **mvn compile** and then an **mvn clean package** command and then go to **target** folder to run this command: **java -jar RuleBase-1.0-SNAPSHOT.jar**.
+3. Go to RuleBase/RuleBase and start this component with these commands: **mvn clean package** and then **mvn spring-boot:run**.
 4. Go to GetBanks folder and start this component with this command: **python getBanks.py**.
 5. Go to Recipientlist folder and start this component with this command: **mvn exec:java**.
 6. Go to xmlTranslator folder and start this component with this command: **dotnet run**.
