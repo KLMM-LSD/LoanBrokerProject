@@ -62,13 +62,24 @@ This project at the moment only runs with the jsonBank and the xmlBank. The Rabb
 2. Navigate to the projects root folder.
 3. Run these scripts with your path to /applications as an argument, i.e. :  
 
+##### LoanBroker startup script 
 ```From droplet
 ./startScript.sh $PWD/Applications
 ```
+##### Builds components and starts external ones
 ```For the host-machine
 ./buildscript.sh $PWD/Applications
 ./startScriptHost.sh $PWD/Applications
 ```
+##### Sends messages through the system on a loop
+```From droplet
+./simulate.sh $PWD/Applications
+```
+##### Kills all components started by startScript.sh
+```From droplet
+./killScript $PWD/Applications
+```
+
 - You have to manually start the external components for now but will be changed in to a script later
 ```Manual start of external components
 Navigate into the Applications/RuleBase/RuleBase folder and run the commands: "mvn clean package" => "mvn spring-boot:run"
