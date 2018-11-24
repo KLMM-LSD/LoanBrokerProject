@@ -10,7 +10,7 @@ printf "$!\n" > "$1/.PIDs.log"
 
 # Run GetBanks
 cd "$1/getBanks"
-python getBanks.py &
+python3 getBanks.py &
 printf "$!\n" >> "$1/.PIDs.log"
 
 # Run Recipient List
@@ -34,7 +34,7 @@ printf "$!\n" >> "$1/.PIDs.log"
 
 # Run Normalizer
 cd "$1/Normalizer"
-python normalizer.py &
+python3 normalizer.py &
 printf "$!\n" >> "$1/.PIDs.log"
 
 #Run Aggregator
