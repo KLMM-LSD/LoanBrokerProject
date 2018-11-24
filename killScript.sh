@@ -6,4 +6,4 @@ do
 	kill -SIGINT "$line"
 	sleep 1
 	kill "$line"
-done < "Applications/.PIDs.log"
+done < "$1/Applications/.PIDs.log"
