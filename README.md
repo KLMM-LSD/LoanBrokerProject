@@ -61,32 +61,31 @@ This project at the moment only runs with the jsonBank and the xmlBank. The Rabb
 1. First clone the project.
 2. Navigate to the projects root folder.
 3. Run these scripts with your path to /applications as an argument, i.e. :  
-
-##### LoanBroker startup script 
-```From droplet
-./startScript.sh $PWD/Applications
-```
-##### Builds components and starts external ones
-```For the host-machine
-./buildscript.sh $PWD/Applications
-./startScriptHost.sh $PWD/Applications
-```
-##### Sends messages through the system on a loop
-```From droplet
-./simulate.sh $PWD/Applications
-```
-##### Kills all components started by startScript.sh
-```From droplet
-./killScript $PWD/Applications
-```
-
-- You have to manually start the external components for now but will be changed in to a script later
+- **NOTE** You have to manually start the external components for now but will be changed in to a script later
 ```Manual start of external components
 Navigate into the Applications/RuleBase/RuleBase folder and run the commands: "mvn clean package" => "mvn spring-boot:run"
 Navigate into the Applications/Svedbanken folder and run the command: "python svedbanken.py"
 ```
 
-#### Running the application (Manual)
+##### LoanBroker startup script from droplet and for ubuntu users
+```From droplet
+./startScript.sh $PWD/Applications
+```
+##### Builds components and starts components for your windows host machine
+```For the host-machine
+./buildscript.sh $PWD/Applications
+./startScriptHost.sh $PWD/Applications
+```
+##### Sends messages through the system on a loop
+```simulation
+./simulate.sh $PWD/Applications
+```
+##### Kills all components started by startScript.sh
+```kills
+./killScript $PWD/Applications
+```
+
+#### Running the application (Manually)
 1. First clone the project.
 2. Go into the Applications folder where you can see all the internal and external components.
 3. Go to RuleBase/RuleBase and start this component with these commands: **mvn clean package** and then **mvn spring-boot:run**.
