@@ -25,6 +25,7 @@
     "babel-core": "^6.26.3",
     "babel-preset-env": "^1.7.0",
     "chai": "^4.2.0",
+    "event-stream": "^3.3.4",
     "mocha": "^5.2.0",
     "rimraf": "^2.6.2"
   },
